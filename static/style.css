@@ -1,0 +1,165 @@
+body {
+    background-color: #ececec;
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    outline: none;
+}
+
+.container {
+    width: 1170px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.form-control {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+    -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+    transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.5s ease-in-out;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-primary {
+    cursor: pointer;
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.btn-success {
+    cursor: pointer;
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.value_error {
+    margin: 3px 0 0 13px;
+    color: #d00101;
+}
+
+.login-signup-page {
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+
+.login-signup-page h1 {
+    display: inline-block;
+    font-family: sans-serif;
+    color: rgb(192, 192, 192);
+    margin: 5% 20%;
+}
+
+.login-signup-page [data-class="login"].selected {
+    color: rgb(51, 122, 183);
+}
+
+.login-signup-page [data-class="signup"].selected {
+    color: rgb(92, 184, 92);
+}
+
+.login-signup-page .form-login,
+.login-signup-page .form-signup {
+    float: left;
+    width: 49%;
+}
+
+.login-signup-page .input-container {
+    position: relative;
+    width: 70%;
+    margin-bottom: 15px;
+}
+
+.login-signup-page .input-container::before {
+    display: table;
+    content: " ";
+}
+
+.login-signup-page .input-container label {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.login-signup-page .input-container a {
+    color: #0a0ac7;
+    text-decoration: none;
+}
+
+.login-signup-page .input-container a:hover {
+    text-decoration: underline;
+}
+
+.login-signup-page .input-container select {
+    padding: 7px 15px;
+    border-color: #cccccc;
+}
+
+.login-signup-page .input-container .input-container-sex input {
+    width: 20px;
+    height: 20px;
+}
+
+.login-signup-page .input-container .input-container-sex label {
+    font-size: 40px;
+    margin-right: 20px;
+}
