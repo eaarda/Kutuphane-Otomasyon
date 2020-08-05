@@ -1,46 +1,66 @@
-from flask import Flask, render_template,request,redirect,url_for
+from flask import Flask, render_template,request,redirect,url_for, session
 from flask_sqlalchemy import SQLAlchemy
+from flask import flash
+from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Toshiba/Desktop/library/data.db'
+app.config['SECRET_KEY'] = 'cokgizli'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def get(id):
+    return User.query.get(id)
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/add",methods = ["POST"])
-def addUser():
-    username = request.form.get("username")
-    email = request.form.get("email")
-    password = request.form.get("password")
-    newUser = User(username = username, email = email, password = password)
 
-    db.session.add(newUser)
-    db.session.commit()
-    return redirect(url_for("index"))
-
-@app.route("/login",methods = ["POST"])
-def loginUser():
-    email = request.form.get('email')
-    password = request.form.get('password')
-    hashed_password = generate_password_hash(password)
-
+@app.route("/login", methods=['POST'])
+def login():
+    email = request.form['email']
+    password = request.form['password']
     user = User.query.filter_by(email=email).first()
-    if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
-        return redirect(url_for('index'))
-    return redirect(url_for('index'))
+    login_user(user)
+    return render_template("home.html")
+
+@app.route("/signup" , methods=['POST'])
+def signup():
+    username = request.form['username']
+    email = request.form['email']
+    password = request.form['password']
+    user = User(username=username, email=email, password=password)
+    db.session.add(user)
+    db.session.commit()
+    user = User.query.filter_by(email=email).first()
+    login_user(user)
+    return render_template("home.html")
+
+@app.route("/logout",methods=['GET'])
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 
-class User(db.Model):
 
+
+
+
+
+
+
+class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120))
     email = db.Column(db.String(120))
     password = db.Column(db.String(80))
-
 
 if __name__ == "__main__":
     app.run(debug = True)
