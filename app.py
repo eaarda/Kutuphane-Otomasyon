@@ -28,6 +28,7 @@ def login():
     password = request.form['password']
     user = User.query.filter_by(email=email).first()
     login_user(user)
+    print("giris yapildi")
     return render_template("home.html")
 
 @app.route("/signup" , methods=['POST'])
@@ -48,19 +49,21 @@ def logout():
     return redirect('/')
 
 
-
-
-
-
-
-
-
-
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120))
     email = db.Column(db.String(120))
     password = db.Column(db.String(80))
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(200))
+    author = db.Column(db.String(200))
+    type = db.Column(db.String(200))
+    stock = db.Column(db.Integer)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug = True)
