@@ -28,7 +28,6 @@ def home():
 @app.route("/admin")
 def admin():
     books = Book.query.all()
-
     return render_template("admin.html",books=books)
 
 @app.route("/login", methods=['POST'])
@@ -78,6 +77,16 @@ def book_add():
         print("kitap kaydedildi")
         return redirect(url_for("admin"))
     return redirect(url_for("admin"))
+
+@app.route("/book_delete/<string:id>")
+def book_delete(id):
+    book = Book.query.filter_by(id=id).first()
+    db.session.delete(book)
+    db.session.commit()
+    print("kitap silindi")
+    return redirect(url_for("admin"))
+
+
     
     
 
