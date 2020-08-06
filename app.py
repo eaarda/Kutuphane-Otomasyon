@@ -45,12 +45,17 @@ def signup():
     username = request.form['username']
     email = request.form['email']
     password = request.form['password']
-    user = User(username=username, email=email, password=password)
-    db.session.add(user)
-    db.session.commit()
-    user = User.query.filter_by(email=email).first()
-    login_user(user)
-    return render_template("home.html")
+    if not username or not email or not password :
+        print("eksik bilgi")
+    else: 
+        user = User(username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+        user = User.query.filter_by(email=email).first()
+        login_user(user)
+        print("kayit olundu")
+
+    return render_template("index.html")
 
 @app.route("/logout",methods=['GET'])
 def logout():
@@ -63,11 +68,18 @@ def book_add():
     author =  request.form.get("author")
     type =  request.form.get("type")
     stock =  request.form.get("stock")
-    newBook = Book(title = title, author=author, type=type,stock=stock)
 
-    db.session.add(newBook)
-    db.session.commit()
+    if not title or not author or not type :
+        print("eksik bilgi")
+    else:
+        newBook = Book(title = title, author=author, type=type,stock=stock)
+        db.session.add(newBook)
+        db.session.commit()
+        print("kitap kaydedildi")
+        return redirect(url_for("admin"))
     return redirect(url_for("admin"))
+    
+    
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
