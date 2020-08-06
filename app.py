@@ -21,6 +21,15 @@ def get(id):
 def index():
     return render_template("index.html")
 
+@app.route("/home")
+def home():
+    return render_template("home.html")
+
+@app.route("/admin")
+def admin():
+    books = Book.query.all()
+
+    return render_template("admin.html",books=books)
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -48,6 +57,17 @@ def logout():
     logout_user()
     return redirect('/')
 
+@app.route("/book_add",methods=['POST'])
+def book_add():
+    title =  request.form.get("title")
+    author =  request.form.get("author")
+    type =  request.form.get("type")
+    stock =  request.form.get("stock")
+    newBook = Book(title = title, author=author, type=type,stock=stock)
+
+    db.session.add(newBook)
+    db.session.commit()
+    return redirect(url_for("admin"))
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
