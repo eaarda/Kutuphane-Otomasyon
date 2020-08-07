@@ -6,16 +6,19 @@
 </head>
 
 <body>
+    <div>
+        <a href="/" class="btn btn-primary">Geri</a>
+        <form action="/adminlogin" method="POST">
+            <h2>Yönetici Giriş</h2>
 
 
-    <form action="/adminlogin" method="POST">
-        <h2>Yönetici Giriş</h2>
-        <input class="form-control" type="admin" name="admin" placeholder="Kullanıcı">
-        <input class="form-control" type="admin_pass" name="admin_pass" placeholder="Şifre" />
+            <input type="text" name="admin" class="text-field" placeholder="Kullanıcı" />
+            <input type="password" name="admin_pass" class="text-field" placeholder="Şifre" />
 
-        <input class="button" name="adminlogin" type="submit" value="Giris Yap">
+            <input class="button" name="adminlogin" type="submit" value="Giris Yap" />
 
-    </form>
+        </form>
+    </div>
 
 
 </body>
@@ -39,7 +42,7 @@
         padding-top: 1px;
     }
     
-    form .form-control {
+    form .text-field {
         border: 1px solid #a6a6a6;
         width: 230px;
         height: 40px;
@@ -51,7 +54,7 @@
         outline: none;
     }
     
-    form .form-control:focus {
+    form .text-field:focus {
         box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
         color: #a6a6a6;
         background: white;

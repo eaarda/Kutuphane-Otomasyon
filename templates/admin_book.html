@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
+</head>
+
+<body>
+    <div>
+        <section class='header'>
+            <header>
+                <ul class='menu'>
+                    <li>
+                        <a href='/admin'>Ana Sayfa</a>
+                    </li>
+                    <li>
+                        <a href='/admin_book'>Kitaplar</a>
+                    </li>
+                    <li>
+                        <a href='/admin_users'>Üyeler</a>
+                    </li>
+                    <li>
+                        <a href='#'></a>
+                    </li>
+                    <li class="logout">
+                        <a href='/logout'>Çıkış Yap</a>
+                    </li>
+                </ul>
+            </header>
+        </section>
+
+        <div style="margin-top: 150px;" class="container">
+            <h3>Kitap Kayıt</h3>
+            <hr>
+            <form action="/book_add" method="POST">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Kitap Adı</label>
+                    <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Kitap Adı Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Yazar</label>
+                    <input type="text" name="author" class="form-control" id="formGroupExampleInput2" placeholder="Yazar Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Tür</label>
+                    <input type="text" name="type" class="form-control" id="formGroupExampleInput3" placeholder="Tür Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Barkod</label>
+                    <input type="text" name="barcode" class="form-control" id="formGroupExampleInput4" placeholder="Barkod Bilgisi">
+                </div>
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+            <table class="table">
+                <br><br><br>
+                <h3>Kitap Listesi</h3>
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Kitap Adı</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col">Tür</th>
+                        <th scope="col">Barkod</th>
+                        <th scope="col">Durum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for book in books %}
+                    <tr>
+                        <th scope="row">{{book.id}}</th>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.type}}</td>
+                        <td>{{book.barcode}}</td>
+                        {% if book.status==True %}
+                        <td>1</td>
+                        {% else %}
+                        <td>0</td>
+                        {% endif %}
+                        <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

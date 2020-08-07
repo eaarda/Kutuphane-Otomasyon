@@ -27,12 +27,21 @@ def home():
 
 @app.route("/admin")
 def admin():
-    books = Book.query.all()
-    return render_template("admin.html",books=books)
+    return render_template("admin.html")
 
 @app.route("/panel")
 def panel():
     return render_template("adminlogin.html")
+
+@app.route("/admin_book")
+def admin_book():
+    books = Book.query.all()
+    return render_template("admin_book.html",books=books)
+
+@app.route("/admin_users")
+def admin_users():
+    users = User.query.all()
+    return render_template("admin_users.html", users=users)
 
 @app.route("/adminlogin",methods=['POST'])
 def adminlogin():
@@ -106,8 +115,8 @@ def book_add():
         db.session.add(newBook)
         db.session.commit()
         print("kitap kaydedildi")
-        return redirect(url_for("admin"))
-    return redirect(url_for("admin"))
+        return redirect(url_for("admin_book"))
+    return redirect(url_for("admin_book"))
 
 @app.route("/book_delete/<string:id>")
 def book_delete(id):
@@ -115,8 +124,15 @@ def book_delete(id):
     db.session.delete(book)
     db.session.commit()
     print("kitap silindi")
-    return redirect(url_for("admin"))
+    return redirect(url_for("admin_book"))
 
+@app.route("/user_delete/<string:id>")
+def user_delete(id):
+    user = User.query.filter_by(id=id).first()
+    db.session.delete(user)
+    db.session.commit()
+    print("Kullanici silindi")
+    return redirect(url_for("admin_users"))
 
 
 class User(UserMixin,db.Model):
