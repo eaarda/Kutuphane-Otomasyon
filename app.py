@@ -34,7 +34,7 @@ def admin():
 def panel():
     return render_template("adminlogin.html")
 
-@app.route("/adminlogin", methods=['POST'])
+@app.route("/adminlogin",methods=['POST'])
 def adminlogin():
     admin = request.form['admin']
     admin_pass = request.form['admin_pass']
@@ -42,10 +42,11 @@ def adminlogin():
         print("eksik bilgi")
     else:
         admin = Admin.query.filter_by(admin=admin,admin_pass=admin_pass).first()
-        print("giris yapildi")
-        return render_template("admin.html")
+        if admin:
+            print("giris yapildi")
+            return redirect('/admin')
+    
     return render_template("adminlogin.html")
-
 
 @app.route("/login", methods=['POST'])
 def login():
@@ -130,7 +131,7 @@ class Book(db.Model):
     type = db.Column(db.String(200))
     barcode = db.Column(db.Integer)
     status = db.Column(db.Boolean, default=True)
-class Admin(db.Model):
+class Admin(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     admin = db.Column(db.String(80))
     admin_pass = db.Column(db.String(80))
