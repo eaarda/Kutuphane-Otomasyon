@@ -84,7 +84,7 @@ def book_add():
     if existing_book:
         print("book already exists")
     else:
-        newBook = Book(title = title, author=author, type=type,barcode=barcode)
+        newBook = Book(title = title, author=author, type=type,barcode=barcode,status=True)
         db.session.add(newBook)
         db.session.commit()
         print("kitap kaydedildi")
@@ -100,21 +100,19 @@ def book_delete(id):
     return redirect(url_for("admin"))
 
 
-    
-    
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(120))
     email = db.Column(db.String(120))
     password = db.Column(db.String(80))
-
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200))
     author = db.Column(db.String(200))
     type = db.Column(db.String(200))
     barcode = db.Column(db.Integer)
+    status = db.Column(db.Boolean, default=True)
 
 
 

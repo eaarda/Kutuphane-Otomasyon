@@ -5,64 +5,81 @@
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
 </head>
-<a href="/home" class="btn btn-primary">Geri</a>
-<div style="margin-top: 100px;" class="container">
 
-    <h3>Kitap Kayıt</h3>
-    <hr>
-
-    <form action="/book_add" method="POST">
-        <div class="form-group">
-            <label for="formGroupExampleInput">Kitap Adı</label>
-            <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Kitap Adı Bilgisi">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Yazar</label>
-            <input type="text" name="author" class="form-control" id="formGroupExampleInput2" placeholder="Yazar Bilgisi">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Tür</label>
-            <input type="text" name="type" class="form-control" id="formGroupExampleInput3" placeholder="Tür Bilgisi">
-        </div>
-        <div class="form-group">
-            <label for="formGroupExampleInput2">Barkod</label>
-            <input type="text" name="barcode" class="form-control" id="formGroupExampleInput4" placeholder="Barkod Bilgisi">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Ekle</button>
-
-    </form>
-
-    <table class="table">
-        <br><br><br>
-        <h3>Kitap Listesi</h3>
-        <thead>
-            <tr>
-                <th scope="col">id</th>
-                <th scope="col">Kitap Adı</th>
-                <th scope="col">Yazar</th>
-                <th scope="col">Tür</th>
-                <th scope="col">Barkod</th>
-            </tr>
-        </thead>
-        <tbody>
-            {%for book in books %} 
-                <tr>
-                <th scope="row">{{book.id}}</th>
-                <td>{{book.title}}</td>
-                <td>{{book.author}}</td>
-                <td>{{book.type}}</td>
-                <td>{{book.barcode}}</td>
-                <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
 
 <body>
+    <div>
+        <section class='header'>
+            <header>
+                <ul class='menu'>
+                    <li class="anasayfa">
+                        <a href='/home'>Ana Sayfa</a>
+                    </li>
+                    <li>
+                        <a href='/admin'>Admin</a>
+                    </li>
+                    <li>
+                        <a href='#'>Profil</a>
+                    </li>
+                    <li class="logout">
+                        <a href='/logout'>Çıkış Yap</a>
+                    </li>
+                </ul>
+            </header>
+        </section>
+        <a href="/home" class="btn btn-primary">Geri</a>
+        <div style="margin-top: 100px;" class="container">
+            <h3>Kitap Kayıt</h3>
+            <hr>
+            <form action="/book_add" method="POST">
+                <div class="form-group">
+                    <label for="formGroupExampleInput">Kitap Adı</label>
+                    <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Kitap Adı Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Yazar</label>
+                    <input type="text" name="author" class="form-control" id="formGroupExampleInput2" placeholder="Yazar Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Tür</label>
+                    <input type="text" name="type" class="form-control" id="formGroupExampleInput3" placeholder="Tür Bilgisi">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Barkod</label>
+                    <input type="text" name="barcode" class="form-control" id="formGroupExampleInput4" placeholder="Barkod Bilgisi">
+                </div>
+                <button type="submit" class="btn btn-primary">Ekle</button>
+            </form>
+            <table class="table">
+                <br><br><br>
+                <h3>Kitap Listesi</h3>
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">Kitap Adı</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col">Tür</th>
+                        <th scope="col">Barkod</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for book in books %}
+                    <tr>
+                        <th scope="row">{{book.id}}</th>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{book.type}}</td>
+                        <td>{{book.barcode}}</td>
+                        <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 
 
 
