@@ -62,6 +62,7 @@
                         <th scope="col">Yazar</th>
                         <th scope="col">Tür</th>
                         <th scope="col">Barkod</th>
+                        <th scope="col">Durum</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -72,6 +73,11 @@
                         <td>{{book.author}}</td>
                         <td>{{book.type}}</td>
                         <td>{{book.barcode}}</td>
+                        {% if book.status==True %}
+                        <td>1</td>
+                        {% else %}
+                        <td>0</td>
+                        {% endif %}
                         <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
                     </tr>
                     {% endfor %}
