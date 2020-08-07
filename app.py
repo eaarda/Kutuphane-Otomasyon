@@ -77,8 +77,12 @@ def book_add():
     type =  request.form.get("type")
     barcode =  request.form.get("barcode")
 
-    if not title or not author or not type :
+    if not title or not author or not type or not barcode :
         print("eksik bilgi")
+
+    existing_book = Book.query.filter_by(barcode=barcode).first()
+    if existing_book:
+        print("book already exists")
     else:
         newBook = Book(title = title, author=author, type=type,barcode=barcode)
         db.session.add(newBook)
