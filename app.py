@@ -13,8 +13,10 @@ from Models.type import Type
 from Controllers.adminControll import adminController
 from Controllers.userControll import userController
 from Controllers.bookControll import bookController
+from Routes.routes import routes
 
 app = Flask(__name__)
+app.register_blueprint(routes)
 app.register_blueprint(adminController)
 app.register_blueprint(userController)
 app.register_blueprint(bookController)
@@ -31,33 +33,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def get(id):
     return User.query.get(id)
-
-@app.route("/")
-def index():
-    return render_template("index.html")
-
-@app.route("/home")
-def home():
-    return render_template("home.html")
-
-@app.route("/admin")
-def admin():
-    return render_template("admin.html")
-
-@app.route("/panel")
-def panel():
-    return render_template("adminlogin.html")
-
-@app.route("/admin_book")
-def admin_book():
-    books = Book.query.all()
-    types = Type.query.all()
-    return render_template("admin_book.html",books=books,types=types)
-
-@app.route("/admin_users")
-def admin_users():
-    users = User.query.all()
-    return render_template("admin_users.html", users=users)
 
 
 if __name__ == "__main__":

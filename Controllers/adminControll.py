@@ -36,4 +36,4 @@ def user_delete(id):
     db.session.delete(user)
     db.session.commit()
     print("Kullanici silindi")
-    return redirect(url_for("admin_users"))
+    return redirect(url_for("routes.admin_users"))

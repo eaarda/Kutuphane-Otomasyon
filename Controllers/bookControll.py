@@ -26,9 +26,9 @@ def book_add():
         db.session.add(newBook)
         db.session.commit()
         print("kitap kaydedildi")
-        return redirect(url_for("admin_book"))
+        return redirect(url_for("routes.admin_book"))
 
-    return redirect(url_for("admin_book"))
+    return redirect(url_for("routes.admin_book"))
 
 
 @bookController.route("/book_delete/<string:id>")
@@ -37,4 +37,4 @@ def book_delete(id):
     db.session.delete(book)
     db.session.commit()
     print("kitap silindi")
-    return redirect(url_for("admin_book"))
+    return redirect(url_for("routes.admin_book"))
