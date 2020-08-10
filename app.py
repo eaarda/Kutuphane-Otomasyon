@@ -151,6 +151,9 @@ class Admin(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
     admin = db.Column(db.String(80))
     admin_pass = db.Column(db.String(80))
+class Type(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String(80))
     
 
 
