@@ -1,6 +1,15 @@
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
+from flask_sqlalchemy import SQLAlchemy
+from flask import flash
+from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
+
+from Models.user import User
+
+userController = Blueprint('userController',__name__)
 
 
-@app.route("/login", methods=['POST'])
+@userController.route("/login", methods=['POST'])
 def login():
     email = request.form['email']
     password = request.form['password']
@@ -10,11 +19,12 @@ def login():
         user = User.query.filter_by(email=email,password=password).first()
         login_user(user)
         print("giris yapildi")
-        return render_template("home.html")
+        return redirect('/home')
+        
     return render_template("index.html")
 
 
-@app.route("/signup" , methods=['POST'])
+@userController.route("/signup" , methods=['POST'])
 def signup():
     username = request.form['username']
     email = request.form['email']
@@ -31,13 +41,13 @@ def signup():
         db.session.add(user)
         db.session.commit()
         login_user(user)
-        return render_template("home.html")
+        return redirect('/home')
         print("kayit olundu")
 
     return render_template("index.html")
 
 
-@app.route("/logout",methods=['GET'])
+@userController.route("/logout",methods=['GET'])
 def logout():
     logout_user()
     return redirect('/')

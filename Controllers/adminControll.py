@@ -5,6 +5,7 @@ from flask_login import LoginManager, UserMixin, login_required, login_user,logo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from Models.admin import Admin
+from Models.user import User
 
 adminController = Blueprint('adminController',__name__)
 
@@ -21,6 +22,11 @@ def adminlogin():
             return redirect('/admin')
     
     return render_template("/adminlogin.html")
+
+@adminController.route("/logout",methods=['GET'])
+def logout():
+    logout_user()
+    return redirect('/')
 
 
 @adminController.route("/user_delete/<string:id>")

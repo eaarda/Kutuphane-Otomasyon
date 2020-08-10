@@ -10,12 +10,18 @@ from Models.book import Book
 from Models.type import Type
 
 from Controllers.adminControll import adminController
+from Controllers.userControll import userController
+from Controllers.bookControll import bookController
 
 app = Flask(__name__)
 app.register_blueprint(adminController)
+app.register_blueprint(userController)
+app.register_blueprint(bookController)
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Toshiba/Desktop/library/data.db'
 app.config['SECRET_KEY'] = 'cokgizli'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
 db = SQLAlchemy(app)
 
 login_manager = LoginManager()

@@ -1,6 +1,13 @@
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
+from flask_sqlalchemy import SQLAlchemy
+from flask import flash
+
+from Models.book import Book
+
+bookController = Blueprint('bookController',__name__)
 
 
-@app.route("/book_add",methods=['POST'])
+@bookController.route("/book_add",methods=['POST'])
 def book_add():
     title =  request.form.get("title")
     author =  request.form.get("author")
@@ -24,7 +31,7 @@ def book_add():
     return redirect(url_for("admin_book"))
 
 
-@app.route("/book_delete/<string:id>")
+@bookController.route("/book_delete/<string:id>")
 def book_delete(id):
     book = Book.query.filter_by(id=id).first()
     db.session.delete(book)
