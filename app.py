@@ -36,7 +36,8 @@ def panel():
 @app.route("/admin_book")
 def admin_book():
     books = Book.query.all()
-    return render_template("admin_book.html",books=books)
+    types = Type.query.all()
+    return render_template("admin_book.html",books=books,types=types)
 
 @app.route("/admin_users")
 def admin_users():
@@ -101,7 +102,8 @@ def logout():
 def book_add():
     title =  request.form.get("title")
     author =  request.form.get("author")
-    type =  request.form.get("type")
+    type =  request.form.get('select_type')
+    print(type)
     barcode =  request.form.get("barcode")
 
     if not title or not author or not type or not barcode :
@@ -116,6 +118,7 @@ def book_add():
         db.session.commit()
         print("kitap kaydedildi")
         return redirect(url_for("admin_book"))
+
     return redirect(url_for("admin_book"))
 
 @app.route("/book_delete/<string:id>")
@@ -133,7 +136,6 @@ def user_delete(id):
     db.session.commit()
     print("Kullanici silindi")
     return redirect(url_for("admin_users"))
-
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -155,7 +157,6 @@ class Type(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(80))
     
-
 
 
 
