@@ -2,10 +2,10 @@ from flask import Blueprint,Flask, render_template,request,redirect,url_for, ses
 from flask_sqlalchemy import SQLAlchemy
 from flask import flash
 
+from Models.db import db
 from Models.book import Book
 
 bookController = Blueprint('bookController',__name__)
-
 
 @bookController.route("/book_add",methods=['POST'])
 def book_add():

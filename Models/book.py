@@ -1,10 +1,7 @@
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-db = SQLAlchemy(app)
-
+from Models.db import db
 
 class Book(db.Model):
     id = db.Column(db.Integer, primary_key=True)

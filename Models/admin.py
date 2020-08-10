@@ -2,9 +2,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
-
-app = Flask(__name__)
-db = SQLAlchemy(app)
+from Models.db import db
 
 class Admin(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)
