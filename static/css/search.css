@@ -7,11 +7,9 @@ body {
 body {
     background: radial-gradient( ellipse at center, rgba(194, 234, 219, 1) 0%, rgba(227, 215, 242, 1) 74%, rgba(227, 215, 242, 1) 74%);
     background-size: 300%;
+    font-family: "Montserrat", Helvetica, sans-serif;
     padding: 3em;
     color: #333;
-    font-family: "Source Sans Pro";
-    font-size: 20px;
-    font-weight: 300;
 }
 
 #searchform {
@@ -94,7 +92,7 @@ h1 {
 
 #submit {
     display: block;
-    margin: -1.83em 525 2.5em;
+    margin: -2.99em 525 2.5em;
     padding: 0.25em 0.5em;
     font-size: 1.2em;
     color: #439973;

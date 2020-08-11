@@ -36,13 +36,18 @@
             <input type="text" id="search-bar" autocomplete="off" placeholder="Kitap ya da Yazar Adı Girin" />
             <ul class="output" style="display:none;">
             </ul>
+            <select class="form-kat" id="select_type" name="select_type">
+                    <option value ="">Kategori</option>
+                    {% for type in types %}
+                        <option value="{{ type.type }} ">{{ type.type }}</option>
+                    {% endfor %}
+                </select>
             <button type="submit" id="submit">Bul</button>
         </form>
 
-        <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400|Patua+One' rel='stylesheet' type='text/css'>
-
 
     </div>
+
 
 
 </html>

@@ -14,7 +14,8 @@ def index():
 
 @routes.route("/home")
 def home():
-    return render_template("home.html")
+    types = Type.query.all()
+    return render_template("home.html",types=types)
 
 @routes.route("/admin")
 def admin():
