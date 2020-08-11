@@ -1,10 +1,14 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
-from flask import flash
+from flask import flash,session
 
+
+from Models.db import db
 from Models.admin import Admin
 from Models.user import User
 from Models.book import Book
 from Models.type import Type
+
+from Controllers.bookControll import book_search
 
 routes = Blueprint('routes',__name__)
 
@@ -15,7 +19,8 @@ def index():
 @routes.route("/home")
 def home():
     types = Type.query.all()
-    return render_template("home.html",types=types)
+    results = book_search()
+    return render_template("home.html",types=types,results=results)
 
 @routes.route("/admin")
 def admin():

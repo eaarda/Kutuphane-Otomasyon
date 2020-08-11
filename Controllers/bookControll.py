@@ -1,4 +1,4 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
+from flask import Blueprint,Flask, g, render_template,request,redirect,url_for, session
 from flask_sqlalchemy import SQLAlchemy
 from flask import flash
 
@@ -44,6 +44,10 @@ def book_delete(id):
 def book_search():
     book_search = request.form.get('book_search')
     print(book_search)
-    return render_template('home.html')
+    if book_search:
+        books = Book.query.filter_by(title = book_search).all()
+        return render_template("home.html",books=books)
+
+    return redirect(url_for("routes.home"))
 
 
