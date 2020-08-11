@@ -38,3 +38,12 @@ def book_delete(id):
     db.session.commit()
     print("kitap silindi")
     return redirect(url_for("routes.admin_book"))
+
+@bookController.route("/book_search")
+def book_search():
+    book_search = request.form.get["book_search"]
+    print("deneme")
+    print(book_search)
+    return redirect(url_for("routes.home"))
+
+

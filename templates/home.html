@@ -31,18 +31,16 @@
         </section>
         <br><br><br><br><br><br><br><br><br>
 
-        <form id="searchform">
-
-            <input type="text" id="search-bar" autocomplete="off" placeholder="Kitap ya da Yazar Adı Girin" />
-            <ul class="output" style="display:none;">
-            </ul>
+        <form action="/book_search" method="POST" id="searchform">
+            <input type="text" name="book_search" id="search-bar" autocomplete="off" placeholder="Kitap ya da Yazar Adı Girin" />
+            <ul class="output" style="display:none;"></ul>
             <select class="form-kat" id="select_type" name="select_type">
                     <option value ="">Kategori</option>
                     {% for type in types %}
                         <option value="{{ type.type }} ">{{ type.type }}</option>
                     {% endfor %}
                 </select>
-            <button type="submit" id="submit">Bul</button>
+            <button type="submit" name="book_search" id="submit">Bul</button>
         </form>
 
 
