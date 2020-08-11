@@ -4,6 +4,7 @@ from flask import flash
 
 from Models.db import db
 from Models.book import Book
+from Models.type import Type
 
 bookController = Blueprint('bookController',__name__)
 
@@ -42,11 +43,15 @@ def book_delete(id):
 
 @bookController.route("/book_search",methods=['POST'])
 def book_search():
+    types = Type.query.all()
     book_search = request.form.get('book_search')
+    search = "%{}%".format(book_search)
     print(book_search)
     if book_search:
-        books = Book.query.filter_by(title = book_search).all()
-        return render_template("home.html",books=books)
+        #books = Book.query.filter_by(title = book_search).all()
+        books = db.session.query(Book).filter(Book.title.like(search)).all()
+        print(books)
+        return render_template("home.html",types=types,books=books)
 
     return redirect(url_for("routes.home"))
 
