@@ -39,11 +39,11 @@ def book_delete(id):
     print("kitap silindi")
     return redirect(url_for("routes.admin_book"))
 
-@bookController.route("/book_search")
+
+@bookController.route("/book_search",methods=['POST'])
 def book_search():
-    book_search = request.form.get["book_search"]
-    print("deneme")
+    book_search = request.form.get('book_search')
     print(book_search)
-    return redirect(url_for("routes.home"))
+    return render_template('home.html')
 
 
