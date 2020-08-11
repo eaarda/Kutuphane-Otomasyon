@@ -5,10 +5,8 @@ from flask_login import LoginManager, UserMixin, login_required, login_user,logo
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from Models.db import db
-from Models.admin import Admin
 from Models.user import User
-from Models.book import Book
-from Models.type import Type
+
 
 from Controllers.adminControll import adminController
 from Controllers.userControll import userController
@@ -33,6 +31,7 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def get(id):
     return User.query.get(id)
+
 
 
 if __name__ == "__main__":

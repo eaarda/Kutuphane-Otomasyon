@@ -9,7 +9,7 @@ from Models.user import User
 
 userController = Blueprint('userController',__name__)
 
-@userController.route("/login", methods=['POST'])
+@userController.route("/login", methods=['GET','POST'])
 def login():
     email = request.form['email']
     password = request.form['password']
