@@ -31,7 +31,7 @@
                     </li>
                 </ul>
             </header>
-        </section>  
+        </section>
         <div style="margin-top: 150px;" class="container">
             <table class="table">
                 <thead>
@@ -43,12 +43,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for borrow in borrows %}
+                    {%for order in orders %}
                     <tr>
-                        <td>{{borrow.book_id}}</td>
-                        <td>{{borrow.user_id}}</td>
-                        <td>{{borrow.start_date}}</td>
-                        <td>{{borrow.end_date}}</td>
+                        <td>{{order.title}}</td>
+                        <td>{{order.author}}</td>
+                        <td>{{order.start_date}}</td>
+                        <td>{{order.end_date}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
