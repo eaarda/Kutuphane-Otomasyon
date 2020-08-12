@@ -37,17 +37,13 @@
         <form action="/book_search" method="POST" id="searchform">
             <input type="text" name="book_search" id="search-bar" autocomplete="off" placeholder="Kitap ya da Yazar Adı Girin" />
             <ul class="output" style="display:none;"></ul>
-            <select class="form-kat" id="select_type" name="select_type">
-                    <option value ="">Kategori</option>
-                    {% for type in types %}
-                        <option value="{{ type.type }} ">{{ type.type }}</option>
-                    {% endfor %}
-                </select>
+
             <button type="submit" name="book_search" id="submit">Bul</button>
         </form>
 
         <div style="margin-top: 150px;" class="container">
 
+            {% if books: %}
             <table class="table">
                 <thead>
                     <tr>
@@ -69,6 +65,9 @@
                     {% endfor %}
                 </tbody>
             </table>
+            {% else %}
+            <h3>Kayıt Yok</h3>
+            {% endif %}
         </div>
 
 

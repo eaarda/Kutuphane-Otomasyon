@@ -18,9 +18,8 @@ def index():
 
 @routes.route("/home")
 def home():
-    types = Type.query.all()
     results = book_search()
-    return render_template("home.html",types=types,results=results)
+    return render_template("home.html",results=results)
 
 @routes.route("/admin")
 def admin():
