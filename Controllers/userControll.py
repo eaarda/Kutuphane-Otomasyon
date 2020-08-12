@@ -4,10 +4,12 @@ from flask import flash
 from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_ ,update
+from datetime import datetime
 
 from Models.db import db
 from Models.user import User
 from Models.book import Book
+from Models.borrow import Borrow
 
 userController = Blueprint('userController',__name__)
 
@@ -58,6 +60,11 @@ def logout():
 def borrow_book(id):
     borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
     print(borrow)
-    db.session.commit()
 
-    return redirect(url_for("routes.home"))
+    newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date=datetime.now(),end_date=False)
+    db.session.add(newBorrow)
+    db.session.commit()
+    print(newBorrow)
+    print("odunc alindi")
+
+    return redirect(url_for("routes.user_book"))

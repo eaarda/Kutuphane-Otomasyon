@@ -4,9 +4,7 @@ from flask import flash
 from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
 from Models.user import User
-
 
 from Controllers.adminControll import adminController
 from Controllers.userControll import userController

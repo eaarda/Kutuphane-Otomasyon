@@ -1,5 +1,6 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
 from flask import flash,session
+from flask_login import current_user
 
 
 from Models.db import db
@@ -43,4 +44,5 @@ def admin_users():
 @routes.route("/user_book")
 def user_book():
     books = Book.query.all()
+    print(current_user)
     return render_template("user_book.html",books=books)
