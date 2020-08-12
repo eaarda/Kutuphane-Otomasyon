@@ -4,7 +4,7 @@ from flask import flash
 from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from Models.db import db
+
 from Models.user import User
 
 
@@ -22,6 +22,7 @@ app.register_blueprint(bookController)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Toshiba/Desktop/library/data.db'
 app.config['SECRET_KEY'] = 'cokgizli'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+db = SQLAlchemy(app)
 db.init_app(app)
 
 
@@ -31,7 +32,6 @@ login_manager.init_app(app)
 @login_manager.user_loader
 def get(id):
     return User.query.get(id)
-
 
 
 if __name__ == "__main__":

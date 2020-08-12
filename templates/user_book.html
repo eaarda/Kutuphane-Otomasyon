@@ -18,7 +18,7 @@
                         <a href='/home'>Ana Sayfa</a>
                     </li>
                     <li>
-                        <a href='/user_book'>Kitaplar</a>
+                        <a href='#'>Kitaplar</a>
                     </li>
                     <li>
                         <a href='#'>Profil</a>
@@ -34,46 +34,7 @@
         </section>
         <br><br><br><br><br><br><br><br><br>
 
-        <form action="/book_search" method="POST" id="searchform">
-            <input type="text" name="book_search" id="search-bar" autocomplete="off" placeholder="Kitap ya da Yazar Adı Girin" />
-            <ul class="output" style="display:none;"></ul>
-
-            <button type="submit" name="book_search" id="submit">Bul</button>
-        </form>
-
-        <div style="margin-top: 150px;" class="container">
-
-            {% if books: %}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Kitap</th>
-                        <th scope="col">Yazar</th>
-                        <th scope="col">Tür</th>
-                        <th scope="col">Durum</th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    {%for book in books %}
-                    <tr>
-                        <td>{{book.title}}</td>
-                        <td>{{book.author}}</td>
-                        <td>{{book.type}}</td>
-                         {% if book.status==True %}
-                        <td>available</td>
-                        <td><a href="/borrow_book/{{book.id}}" class="btn btn-success">Ekle</a>
-                        {% else %}
-                        <td>unavailable</td>
-                        {% endif %}
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <h3>Kayıt Yok</h3>
-            {% endif %}
-        </div>
+        
 
 
     </div>

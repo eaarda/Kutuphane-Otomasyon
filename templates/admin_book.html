@@ -82,11 +82,11 @@
                         <td>{{book.type}}</td>
                         <td>{{book.barcode}}</td>
                         {% if book.status==True %}
-                        <td>1</td>
-                        {% else %}
-                        <td>0</td>
-                        {% endif %}
+                        <td>available</td>
                         <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
+                        {% else %}
+                        <td>unavailable</td>
+                        {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>

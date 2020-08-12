@@ -60,4 +60,4 @@ def borrow_book(id):
     print(borrow)
     db.session.commit()
 
-    return redirect('/home')
+    return redirect(url_for("routes.home"))
