@@ -8,6 +8,7 @@ from Models.admin import Admin
 from Models.user import User
 from Models.book import Book
 from Models.type import Type
+from Models.borrow import Borrow
 
 from Controllers.bookControll import book_search
 
@@ -43,6 +44,6 @@ def admin_users():
 
 @routes.route("/user_book")
 def user_book():
-    books = Book.query.all()
+    borrows = db.session.query(Borrow).filter(Borrow.user_id == current_user.id)
     print(current_user)
-    return render_template("user_book.html",books=books)
+    return render_template("user_book.html",borrows=borrows)

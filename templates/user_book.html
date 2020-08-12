@@ -18,7 +18,7 @@
                         <a href='/home'>Ana Sayfa</a>
                     </li>
                     <li>
-                        <a href='#'>Kitaplar</a>
+                        <a href='/user_book'>Kitaplar</a>
                     </li>
                     <li>
                         <a href='#'>Profil</a>
@@ -31,10 +31,31 @@
                     </li>
                 </ul>
             </header>
-        </section>
-        <br><br><br><br><br><br><br><br><br>
+        </section>  
+        <div style="margin-top: 150px;" class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Kitap</th>
+                        <th scope="col">Yazar</th>
+                        <th scope="col">Alınma Tarihi</th>
+                        <th scope="col">Teslim Tarihi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for borrow in borrows %}
+                    <tr>
+                        <td>{{borrow.book_id}}</td>
+                        <td>{{borrow.user_id}}</td>
+                        <td>{{borrow.start_date}}</td>
+                        <td>{{borrow.end_date}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
