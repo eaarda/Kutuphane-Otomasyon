@@ -1,6 +1,10 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 body {
     font-family: "Montserrat", Helvetica, sans-serif;
+    background: radial-gradient( ellipse at center, rgba(194, 234, 219, 1) 0%, rgba(227, 215, 242, 1) 74%, rgba(227, 215, 242, 1) 74%);
+    background-size: 300%;
+    padding: 3em;
+    color: #333;
 }
 
 a {

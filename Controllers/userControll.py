@@ -3,9 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import flash
 from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from sqlalchemy import or_ ,update
 
 from Models.db import db
 from Models.user import User
+from Models.book import Book
 
 userController = Blueprint('userController',__name__)
 
@@ -51,3 +53,11 @@ def signup():
 def logout():
     logout_user()
     return redirect('/')
+
+@userController.route("/borrow_book/<string:id>")
+def borrow_book(id):
+    borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
+    print(borrow)
+    db.session.commit()
+
+    return redirect('/home')

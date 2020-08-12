@@ -109,6 +109,8 @@ h1 {
 
 /** custom normalize.css */
 
+
+/* 
 *,
 *:before,
 *:after {
@@ -319,4 +321,4 @@ textarea {
 table {
     border-collapse: collapse;
     border-spacing: 0;
-}
+} */

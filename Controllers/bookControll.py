@@ -1,6 +1,6 @@
 from flask import Blueprint,Flask, g, render_template,request,redirect,url_for, session
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import or_
+from sqlalchemy import or_ ,update
 from flask import flash
 
 from Models.db import db
@@ -52,5 +52,6 @@ def book_search():
         return render_template("home.html",books=books)
 
     return redirect(url_for("routes.home"))
+
 
 
