@@ -9,4 +9,4 @@ class Borrow(db.Model):
     user_id = db.Column(db.Integer)
     book_id = db.Column(db.Integer)
     start_date = db.Column(db.DateTime,default=datetime.utcnow)
-    end_date = db.Column(db.DateTime,default=False)
+    end_date = db.Column(db.DateTime)

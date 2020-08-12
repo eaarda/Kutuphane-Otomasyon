@@ -61,10 +61,12 @@ def borrow_book(id):
     borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
     print(borrow)
 
-    newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date=datetime.now(),end_date=False)
+    newBorrow = Borrow(user_id = current_user.id, book_id = id)
+    #start_date=datetime.strptime(start_date, "%Y-%m-%d").date()
     db.session.add(newBorrow)
     db.session.commit()
     print(newBorrow)
     print("odunc alindi")
 
     return redirect(url_for("routes.user_book"))
+
