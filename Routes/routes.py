@@ -51,8 +51,7 @@ def user_book():
 
     def convertdate(rdate):
         cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
-        print(rdate)
-        print(cdate)
+        #futuredate = datetime.now() + timedelta(days=10)
         return cdate
 
     return render_template("user_book.html",orders=orders,convertdate=convertdate)

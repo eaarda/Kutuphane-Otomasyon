@@ -4,7 +4,10 @@ from flask import flash
 from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy import or_ ,update
-from datetime import datetime
+
+from datetime import datetime  
+from datetime import timedelta  
+
 
 from Models.db import db
 from Models.user import User
@@ -60,9 +63,7 @@ def logout():
 def borrow_book(id):
     borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
     print(borrow)
-    newBorrow = Borrow(user_id = current_user.id, book_id = id)
-    #start_date=datetime.strptime(start_date, "%Y-%m-%d").date()
-    #futuredate = datetime.now() + timedelta(days=10)
+    newBorrow = Borrow(user_id = current_user.id, book_id = id, end_date = datetime.now() + timedelta(days=5))
     db.session.add(newBorrow)
     db.session.commit()
     print(newBorrow)
