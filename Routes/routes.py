@@ -44,8 +44,7 @@ def admin_users():
 
 @routes.route("/user_book")
 def user_book():
-    #borrows = db.session.query(Borrow).filter(Borrow.user_id == current_user.id)
-    #books = db.session.query(Book).filter(Book.id == Borrow.book_id)
+
     orders = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).all()
     print(orders)
 

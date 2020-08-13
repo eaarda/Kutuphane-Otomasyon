@@ -43,14 +43,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for order in orders %}
+                   
+                    {%for borrow,book in orders %}
                     <tr>
-                        <td>{{order.title}}</td>
-                        <td>{{order.author}}</td>
-                        <td>{{order.start_date}}</td>
-                        <td>{{order.end_date}}</td>
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{borrow.start_date}}</td>
+                        <td>{{borrow.end_date}}</td>
                     </tr>
                     {% endfor %}
+                    
                 </tbody>
             </table>
         </div>
