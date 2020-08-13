@@ -48,7 +48,7 @@
                     <tr>
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
-                        <td>{{borrow.start_date}}</td>
+                        <td>{{convertdate(borrow.start_date)}}</td>
                         <td>{{borrow.end_date}}</td>
                     </tr>
                     {% endfor %}

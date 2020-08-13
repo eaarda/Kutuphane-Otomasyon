@@ -1,6 +1,7 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
 from flask import flash,session
 from flask_login import current_user
+import datetime
 
 
 from Models.db import db
@@ -48,4 +49,10 @@ def user_book():
     orders = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).all()
     print(orders)
 
-    return render_template("user_book.html",orders=orders)
+    def convertdate(rdate):
+        cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
+        print(rdate)
+        print(cdate)
+        return cdate
+
+    return render_template("user_book.html",orders=orders,convertdate=convertdate)
