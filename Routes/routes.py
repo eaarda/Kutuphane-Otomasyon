@@ -26,7 +26,8 @@ def home():
 
 @routes.route("/admin")
 def admin():
-    return render_template("admin.html")
+    books = Book.query.all()
+    return render_template("admin.html",books=books)
 
 @routes.route("/panel")
 def panel():
@@ -34,9 +35,8 @@ def panel():
 
 @routes.route("/admin_book")
 def admin_book():
-    books = Book.query.all()
     types = Type.query.all()
-    return render_template("admin_book.html",books=books,types=types)
+    return render_template("admin_book.html",types=types)
 
 @routes.route("/admin_users")
 def admin_users():

@@ -84,11 +84,8 @@ def delivery_book(id):
 
 @userController.route("/postpone/<string:id>")
 def postpone(id):
-    newdate = db.session.query(Borrow).filter_by(id = id).first()
-    print("newdate:")
-    print(newdate)
+    
     p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
-    print(p)
     db.session.commit()
 
     return redirect(url_for("routes.user_book"))
