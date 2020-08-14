@@ -1,13 +1,9 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
-from flask_sqlalchemy import SQLAlchemy
-from flask import flash
-from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
+from flask_login import  UserMixin, login_user,logout_user, current_user
 from sqlalchemy import or_ ,update
 
 from datetime import datetime  
 from datetime import timedelta  
-
 
 from Models.db import db
 from Models.user import User
@@ -28,9 +24,8 @@ def login():
     else:
         user = User.query.filter_by(email=email,password=password).first()
         login_user(user)
-        print("giris yapildi")
         return redirect('/home')
-        
+
     return render_template("index.html")
 
 
@@ -50,7 +45,6 @@ def signup():
         db.session.commit()
         login_user(user)
         return redirect('/home')
-        print("kayit olundu")
 
     return render_template("index.html")
 
@@ -68,7 +62,6 @@ def borrow_book(id):
     db.session.add(newBorrow)
     db.session.commit()
     print(newBorrow)
-    print("odunc alindi")
 
     return redirect(url_for("routes.user_book"))
 

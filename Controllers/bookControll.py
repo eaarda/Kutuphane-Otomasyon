@@ -1,7 +1,5 @@
-from flask import Blueprint,Flask, g, render_template,request,redirect,url_for, session
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint,Flask,render_template,request,redirect,url_for, session,flash
 from sqlalchemy import or_ ,update
-from flask import flash
 
 from Models.db import db
 from Models.book import Book
@@ -17,10 +15,8 @@ def book_add():
     existing_book = Book.query.filter_by(barcode=barcode).first()
 
     if not title or not author or not type or not barcode :
-        print("eksik bilgi")
         flash("Tüm alanların doldurulması zorunludur!","wrong")
     elif existing_book:
-        print("book already exists")
         flash("Barkod numarası mevcut!","wrong")
     else:
         newBook = Book(title = title, author=author, type=type,barcode=barcode,status=True)

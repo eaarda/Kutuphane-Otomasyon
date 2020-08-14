@@ -1,8 +1,6 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
-from flask import flash,session
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
 from flask_login import current_user
 import datetime
-
 
 from Models.db import db
 from Models.admin import Admin

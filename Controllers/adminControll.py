@@ -1,8 +1,5 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session
-from flask_sqlalchemy import SQLAlchemy
-from flask import flash
-from flask_login import LoginManager, UserMixin, login_required, login_user,logout_user, current_user
-from werkzeug.security import generate_password_hash, check_password_hash
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
+from flask_login import login_user,logout_user, current_user
 
 from Models.db import db
 from Models.admin import Admin
