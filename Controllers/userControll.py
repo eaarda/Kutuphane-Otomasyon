@@ -73,10 +73,10 @@ def borrow_book(id):
 
 @userController.route("/delivery_book/<string:id>")
 def delivery_book(id):
-    book = db.session.query(Book).filter_by(id=id).update({"status":True})
-    delivery = Borrow.query.filter_by(id=id).first()
-    print(delivery)
-    
+
+    d = db.session.query(Book).filter_by(id=id).update({"status":True})
+
+    delivery = Borrow.query.filter_by(book_id=id).first()
     db.session.delete(delivery)
     db.session.commit()
     

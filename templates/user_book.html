@@ -50,7 +50,7 @@
                         <td>{{book.author}}</td>
                         <td>{{convertdate(borrow.start_date)}}</td>
                         <td>{{convertdate(borrow.end_date)}}</td>   
-                        <td><a href="/delivery_book/{{book.id}}" class="btn btn-outline-success">Teslim Et</a></td>
+                        <td><a href="/delivery_book/{{borrow.book_id}}" class="btn btn-outline-success">Teslim Et</a></td>
                     </tr>
                     {% endfor %}
                     
