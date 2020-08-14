@@ -43,6 +43,7 @@ ul {
     height: 110px;
     background: #fff;
     box-shadow: 0 2px 4px #0056a1;
+    z-index: 2;
 }
 
 .menu li {

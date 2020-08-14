@@ -42,7 +42,6 @@ span {
     font-size: 0.75em;
     transition: min-height 0.2s;
     position: absolute;
-    z-index: -5;
 }
 
 .output,
