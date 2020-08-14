@@ -59,7 +59,7 @@
 
         <div style="margin-top: 150px;" class="container">
 
-            <table class="table">
+            <table class="table table-hover">
                
                 <h3>Üye Listesi</h3>
                 <thead>
@@ -75,7 +75,7 @@
                         <th scope="row">{{user.id}}</th>
                         <td>{{user.username}}</td>
                         <td>{{user.email}}</td>
-                        <td><a href="/user_delete/{{user.id}}" class="btn btn-danger">Sil</a>
+                        <td><a href="/user_delete/{{user.id}}" method="DELETE" class="btn btn-danger">Sil</a>
                     </tr>
                     {% endfor %}
                 </tbody>

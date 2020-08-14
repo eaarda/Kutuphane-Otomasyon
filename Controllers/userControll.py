@@ -72,7 +72,7 @@ def borrow_book(id):
 
     return redirect(url_for("routes.user_book"))
 
-@userController.route("/delivery_book/<string:id>")
+@userController.route("/delivery_book/<string:id>",methods=['GET','DELETE'])
 def delivery_book(id):
 
     d = db.session.query(Book).filter_by(id=id).update({"status":True})
@@ -80,7 +80,16 @@ def delivery_book(id):
     delivery = Borrow.query.filter_by(book_id=id).first()
     db.session.delete(delivery)
     db.session.commit()
-    
-    print("kitap teslim edildi")
+    return redirect(url_for("routes.user_book"))
+
+@userController.route("/postpone/<string:id>")
+def postpone(id):
+    newdate = db.session.query(Borrow).filter_by(id = id).first()
+    print("newdate:")
+    print(newdate)
+    p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
+    print(p)
+    db.session.commit()
+
     return redirect(url_for("routes.user_book"))
 

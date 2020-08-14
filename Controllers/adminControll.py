@@ -30,7 +30,7 @@ def logout():
     return redirect('/')
 
 
-@adminController.route("/user_delete/<string:id>")
+@adminController.route("/user_delete/<string:id>",methods=['GET','DELETE'])
 def user_delete(id):
     user = User.query.filter_by(id=id).first()
     db.session.delete(user)

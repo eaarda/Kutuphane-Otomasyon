@@ -32,7 +32,7 @@ def book_add():
     return redirect(url_for("routes.admin_book"))
 
 
-@bookController.route("/book_delete/<string:id>")
+@bookController.route("/book_delete/<string:id>",methods=['GET','DELETE'])
 def book_delete(id):
     book = Book.query.filter_by(id=id).first()
     db.session.delete(book)

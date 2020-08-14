@@ -58,7 +58,7 @@
             </header>
         </section>
         <div style="margin-top: 150px;" class="container">
-            <table class="table">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">Kitap</th>
@@ -74,7 +74,8 @@
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{convertdate(borrow.start_date)}}</td>
-                        <td>{{convertdate(borrow.end_date)}}</td>   
+                        <td>{{convertdate(borrow.end_date)}}</td>
+                        <td><a href="/postpone/{{borrow.id}}" class="btn btn-outline-info">Teslim Tarihi Güncelle</a></td>
                         <td><a href="/delivery_book/{{borrow.book_id}}" class="btn btn-outline-success">Teslim Et</a></td>
                     </tr>
                     {% endfor %}
