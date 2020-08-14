@@ -50,7 +50,6 @@ def book_search():
         print(books)
         if not books:
             flash("Kayıt bulunamadı")
-            print("kayıt yok")
         return render_template("home.html",books=books)
         
     return redirect(url_for("routes.home"))

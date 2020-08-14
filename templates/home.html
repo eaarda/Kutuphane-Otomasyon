@@ -60,11 +60,11 @@
 
         <div style="margin-top: 200px;" class="container">
 
-           <form action="/book_search" method="POST" id="searchform">
-            <input type="text" name="book_search" id="search-bar"  placeholder="Kitap ya da Yazar Adı Girin" />
-            <ul class="output" style="display:none;"></ul>
-            <button type="submit" name="book_search" id="submit">Bul</button>
-        </form>
+            <form action="/book_search" method="POST" id="searchform">
+                <input type="text" name="book_search" id="search-bar" placeholder="Kitap ya da Yazar Adı Girin" />
+                <ul class="output" style="display:none;"></ul>
+                <button type="submit" name="book_search" id="submit">Bul</button>
+            </form>
 
             {% if books: %}
             <table class="table">
@@ -83,21 +83,18 @@
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{book.type}}</td>
-                         {% if book.status==True %}
+                        {% if book.status==True %}
                         <td>available</td>
-                        <td><a href="/borrow_book/{{book.id}}" class="btn btn-success">Ekle</a>
-                        {% else %}
-                        <td>unavailable</td>
-                        {% endif %}
+                        <td><a href="/borrow_book/{{book.id}}" class="btn btn-success">Ekle</a> {% else %}
+                            <td>unavailable</td>
+                            {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            {% endif %}
-            
-              {% for message in get_flashed_messages() %}
-                    <div class="alert alert-danger" role="alert">{{ message }}</div>
-                {% endfor %}
+            {% endif %} {% for message in get_flashed_messages() %}
+            <div class="alert alert-danger" role="alert">{{ message }}</div>
+            {% endfor %}
         </div>
 
 

@@ -15,10 +15,8 @@
         <header>
             <ul class='menu'>
                 <li>
-                    <a href='#'></a>
                 </li>
                 <li>
-                    <a href='#'></a>
                 </li>
                 <li>
                     <div class="logo">
@@ -49,7 +47,6 @@
                     </div>
                 </li>
                 <li>
-                    <a href='#'></a>
                 </li>
                 <li class="admin">
                     <a href='/panel'>Yönetici Giriş</a>
@@ -62,31 +59,31 @@
 
             <form action="/login" class="form-login margin-right" method="POST">
                 <h1>
-                    <span class="selected" data-class="login"> Giris Yap </span>
+                    <span class="selected" data-class="login"> Giriş Yap </span>
                 </h1>
                 <div class="input-container">
                     <label> Email: </label>
                     <input class="form-control" type="email" name="email" placeholder="Email Adresinizi Girin">
                 </div>
                 <div class="input-container">
-                    <label> Sifre : </label>
-                    <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Sifrenizi Girin">
+                    <label> Şifre : </label>
+                    <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Şifrenizi Girin">
                 </div>
                 {% with messages = get_flashed_messages(category_filter=["login"]) %} {% if messages %} {% for message in messages %}
                 <div class="alert-error">{{ message }}</div>
                 {% endfor %} {% endif %} {% endwith %}
                 <div class="input-container">
-                    <input class="btn btn-primary" name="login" type="submit" value="Giris Yap">
+                    <input class="btn btn-primary" name="login" type="submit" value="Giriş Yap">
                 </div>
             </form>
 
             <form action="/signup" class="form-signup" onsubmit="return Validate()" name="form_signup" method="POST">
                 <h1>
-                    <span class="selected" data-class="signup"> Kayit Ol </span>
+                    <span class="selected" data-class="signup"> Kayıt Ol </span>
                 </h1>
                 <div class="input-container">
-                    <label> Kullanici Adi : </label>
-                    <input class="form-control" type="text" id="username" name="username" autocomplete="off" placeholder="Kullanici Adi Girin">
+                    <label> Kullanıcı Adı : </label>
+                    <input class="form-control" type="text" id="username" name="username" autocomplete="off" placeholder="Kullanıcı Adı Girin">
                     <div id="username_error" class="value_error"></div>
                 </div>
                 <div class="input-container">
@@ -100,11 +97,11 @@
                 {% endfor %} {% endif %} {% endwith %}
 
                 <div class="input-container">
-                    <label> Sifre : </label>
-                    <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Sifrenizi Girin">
+                    <label> Şifre : </label>
+                    <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Şifrenizi Girin">
                 </div>
 
-                <input class="btn btn-success" name="signup" type="submit" value="Kayit Ol">
+                <input class="btn btn-success" name="signup" type="submit" value="Kayıt Ol">
             </form>
         </div>
     </div>
