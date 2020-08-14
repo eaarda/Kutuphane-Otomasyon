@@ -58,8 +58,8 @@
             </header>
         </section>
 
-<div style="margin-top: 50px;" class="container">
-        <table class="table table-hover">
+        <div style="margin-top: 50px;" class="container">
+            <table class="table table-hover">
                 <br><br><br>
                 <h3>Kitap Listesi</h3>
                 <thead>
@@ -82,15 +82,14 @@
                         <td>{{book.barcode}}</td>
                         {% if book.status==True %}
                         <td>available</td>
-                        <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a>
-                        {% else %}
-                        <td>unavailable</td>
-                        {% endif %}
+                        <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a> {% else %}
+                            <td>unavailable</td>
+                            {% endif %}
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
-            </div>
+        </div>
 
     </div>
 

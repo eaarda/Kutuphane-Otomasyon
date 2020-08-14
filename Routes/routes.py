@@ -21,8 +21,7 @@ def index():
 
 @routes.route("/home")
 def home():
-    results = book_search()
-    return render_template("home.html",results=results)
+    return render_template("home.html")
 
 @routes.route("/admin")
 def admin():

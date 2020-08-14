@@ -93,9 +93,11 @@
                     {% endfor %}
                 </tbody>
             </table>
-            {% else %}
-            <h3>Kayıt Yok</h3>
             {% endif %}
+            
+              {% for message in get_flashed_messages() %}
+                    <div class="alert alert-danger" role="alert">{{ message }}</div>
+                {% endfor %}
         </div>
 
 

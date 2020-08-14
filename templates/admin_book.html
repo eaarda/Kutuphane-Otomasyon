@@ -57,7 +57,7 @@
             </header>
         </section>
 
-        <div style="margin-top: 150px;" class="container">
+        <div style="margin-top: 120px;" class="container">
             <h3>Kitap Kayıt</h3>
             <hr>
             <form action="/book_add" method="POST">
@@ -84,6 +84,14 @@
                     <input type="text" name="barcode" class="form-control" id="formGroupExampleInput4" placeholder="Barkod Bilgisi">
                 </div>
                 <button type="submit" class="btn btn-primary">Ekle</button>
+
+                {% with messages = get_flashed_messages(category_filter=["wrong"]) %} {% if messages %} {% for message in messages %}
+                <div class="alert-error">{{ message }}</div>
+                {% endfor %} {% endif %} {% endwith %}
+
+                {% with messages = get_flashed_messages(category_filter=["success"]) %} {% if messages %} {% for message in messages %}
+                <div class="alert-success">{{ message }}</div>
+                {% endfor %} {% endif %} {% endwith %}
             </form>
             
         </div>
@@ -99,5 +107,16 @@
 
 
 </body>
+
+<style>
+    .alert-error {
+    padding: 8px;
+    color: red;
+}
+.alert-success {
+    padding: 8px;
+    color: green;
+}
+</style>
 
 </html>
