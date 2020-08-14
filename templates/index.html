@@ -11,27 +11,27 @@
 </head>
 
 <body>
-<section class='header'>
-            <header>
-                <ul class='menu'>
-                    <li>
-                        <a href='#'></a>
-                    </li>
-                    <li>
-                        <a href='#'></a>
-                    </li>
-                    <li>
-                        <a href='#'></a>
-                    </li>
-                    <li>
-                        <a href='#'></a>
-                    </li>
-                    <li class="admin">
-                        <a href='/panel'>Yönetici Giriş</a>
-                    </li>
-                </ul>
-            </header>
-        </section>
+    <section class='header'>
+        <header>
+            <ul class='menu'>
+                <li>
+                    <a href='#'></a>
+                </li>
+                <li>
+                    <a href='#'></a>
+                </li>
+                <li>
+                    <a href='#'></a>
+                </li>
+                <li>
+                    <a href='#'></a>
+                </li>
+                <li class="admin">
+                    <a href='/panel'>Yönetici Giriş</a>
+                </li>
+            </ul>
+        </header>
+    </section>
     <div class="container">
         <div class="login-signup-page">
 
@@ -47,9 +47,9 @@
                     <label> Sifre : </label>
                     <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Sifrenizi Girin">
                 </div>
-                <div class="input-container">
-                    <a href=""> Sifremi Unuttum </a>
-                </div>
+                {% with messages = get_flashed_messages(category_filter=["login"]) %} {% if messages %} {% for message in messages %}
+                <div class="alert-error">{{ message }}</div>
+                {% endfor %} {% endif %} {% endwith %}
                 <div class="input-container">
                     <input class="btn btn-primary" name="login" type="submit" value="Giris Yap">
                 </div>
@@ -69,6 +69,11 @@
                     <input class="form-control" type="email" name="email" placeholder="Email adresinizi Girin ">
                     <div id="email_error" class="value_error"></div>
                 </div>
+
+                {% with messages = get_flashed_messages(category_filter=["signup"]) %} {% if messages %} {% for message in messages %}
+                <div class="alert-error">{{ message }}</div>
+                {% endfor %} {% endif %} {% endwith %}
+
                 <div class="input-container">
                     <label> Sifre : </label>
                     <input class="form-control" type="password" name="password" autocomplete="password" placeholder="Sifrenizi Girin">
@@ -88,5 +93,12 @@
     <script src="../static/js/a.js"></script>
 
 </body>
+
+<style>
+    .alert-error {
+        padding: 8px;
+        color: red;
+    }
+</style>
 
 </html>
