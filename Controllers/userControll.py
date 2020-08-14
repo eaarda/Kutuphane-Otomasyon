@@ -20,7 +20,10 @@ userController = Blueprint('userController',__name__)
 def login():
     email = request.form['email']
     password = request.form['password']
+    wrong = User.query.filter_by(email=email,password=password).first()
     if not email or not password:
+        flash("Geçersiz email veya şifre","login")
+    elif not wrong:
         flash("Geçersiz email veya şifre","login")
     else:
         user = User.query.filter_by(email=email,password=password).first()
