@@ -72,11 +72,10 @@
                 <h3>Kitap Listesi</h3>
                 <thead>
                     <tr>
-                        <th scope="col">id</th>
+                        <th scope="col">Barkod</th>
                         <th scope="col">Kitap Adı</th>
                         <th scope="col">Yazar</th>
                         <th scope="col">Tür</th>
-                        <th scope="col">Barkod</th>
                         <th scope="col">Durum</th>
                     </tr>
                 </thead>
@@ -84,11 +83,10 @@
                 {% if results: %}
                     {%for result in results %}
                     <tr>
-                        <th scope="row">{{result.id}}</th>
+                        <th scope="row">{{result.barcode}}</th>
                         <td>{{result.title}}</td>
                         <td>{{result.author}}</td>
                         <td>{{result.type}}</td>
-                        <td>{{result.barcode}}</td>
                         {% if result.status==True %}
                         <td>available</td>
                         <td><a href="/book_delete/{{result.id}}" class="btn btn-danger">Sil</a> {% else %}
@@ -99,11 +97,10 @@
                     {% else %}
                     {%for book in books %}
                     <tr>
-                        <th scope="row">{{book.id}}</th>
+                        <th scope="row">{{book.barcode}}</th>
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{book.type}}</td>
-                        <td>{{book.barcode}}</td>
                         {% if book.status==True %}
                         <td>available</td>
                         <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a> {% else %}

@@ -58,7 +58,7 @@ def logout():
 def borrow_book(id):
     borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
     print(borrow)
-    newBorrow = Borrow(user_id = current_user.id, book_id = id, end_date = datetime.now() + timedelta(days=5))
+    newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
     db.session.add(newBorrow)
     db.session.commit()
     print(newBorrow)
