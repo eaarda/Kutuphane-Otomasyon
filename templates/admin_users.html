@@ -59,6 +59,13 @@
 
         <div style="margin-top: 150px;" class="container">
 
+             <form action="/member_search" method="POST" id="searchform">
+                <input type="text" name="member_search" id="search-bar" placeholder="Üye Kullanıcı Adı Girin" />
+                <ul class="output" style="display:none;"></ul>
+                <button type="submit" name="member_search" id="submit">Bul</button>
+            </form>
+
+            {% if members: %}
             <table class="table table-hover">
                
                 <h3>Üye Listesi</h3>
@@ -70,16 +77,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {%for user in users %}
+                    {%for member in members %}
                     <tr>
-                        <th scope="row">{{user.id}}</th>
-                        <td>{{user.username}}</td>
-                        <td>{{user.email}}</td>
-                        <td><a href="/user_delete/{{user.id}}" method="DELETE" class="btn btn-danger">Sil</a>
+                        <th scope="row">{{member.id}}</th>
+                        <td>{{member.username}}</td>
+                        <td>{{member.email}}</td>
+                        <td><a href="/user_delete/{{member.id}}" method="DELETE" class="btn btn-danger">Sil</a>
                     </tr>
-                    {% endfor %}
+                    {% endfor %}    
                 </tbody>
             </table>
+            {% endif %} 
         </div>
     </div>
 
