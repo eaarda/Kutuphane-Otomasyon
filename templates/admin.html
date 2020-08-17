@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/search.css" />
 </head>
 
 
@@ -58,7 +59,14 @@
             </header>
         </section>
 
-        <div style="margin-top: 50px;" class="container">
+        <div style="margin-top: 200px;" class="container">
+
+            <form action="/admin_book_search" method="POST" id="searchform">
+                <input type="text" name="admin_book_search" id="search-bar" placeholder="Kitap,Yazar Adı ya da Barkod Girin" />
+                <ul class="output" style="display:none;"></ul>
+                <button type="submit" name="admin_book_search" id="submit">Bul</button>
+            </form>
+
             <table class="table table-hover">
                 <br><br><br>
                 <h3>Kitap Listesi</h3>
@@ -73,6 +81,22 @@
                     </tr>
                 </thead>
                 <tbody>
+                {% if results: %}
+                    {%for result in results %}
+                    <tr>
+                        <th scope="row">{{result.id}}</th>
+                        <td>{{result.title}}</td>
+                        <td>{{result.author}}</td>
+                        <td>{{result.type}}</td>
+                        <td>{{result.barcode}}</td>
+                        {% if result.status==True %}
+                        <td>available</td>
+                        <td><a href="/book_delete/{{result.id}}" class="btn btn-danger">Sil</a> {% else %}
+                            <td>unavailable</td>
+                            {% endif %}
+                    </tr>
+                    {% endfor %}
+                    {% else %}
                     {%for book in books %}
                     <tr>
                         <th scope="row">{{book.id}}</th>
@@ -87,6 +111,8 @@
                             {% endif %}
                     </tr>
                     {% endfor %}
+
+                {% endif %}
                 </tbody>
             </table>
         </div>

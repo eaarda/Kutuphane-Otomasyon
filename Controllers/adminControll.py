@@ -1,9 +1,11 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
 from flask_login import login_user,logout_user, current_user
+from sqlalchemy import or_ ,update
 
 from Models.db import db
 from Models.admin import Admin
 from Models.user import User
+from Models.book import Book
 
 adminController = Blueprint('adminController',__name__)
 
@@ -48,3 +50,17 @@ def member_search():
         return render_template("admin_users.html",members=members)
         
     return redirect(url_for("routes.admin_users"))
+
+@adminController.route("/admin_book_search",methods=['POST'])
+def admin_book_search():
+    book_search = request.form.get('admin_book_search')
+    search = "%{}%".format(book_search)
+
+    if book_search:
+        results = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
+        print(results)
+        if not results:
+            flash("Kayıt bulunamadı")
+        return render_template("admin.html",results = results)
+        
+    return redirect(url_for("routes.admin"))
