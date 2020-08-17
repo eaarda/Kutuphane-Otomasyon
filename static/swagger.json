@@ -1,0 +1,12 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "elf",
+        "version": "2.0.0",
+        "title": "Ktphne",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    }
+}
