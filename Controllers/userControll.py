@@ -5,7 +5,7 @@ from sqlalchemy import or_ ,update
 from datetime import datetime  
 from datetime import timedelta  
 
-from Models.db import db
+from db import db
 from Models.user import User
 from Models.book import Book
 from Models.borrow import Borrow

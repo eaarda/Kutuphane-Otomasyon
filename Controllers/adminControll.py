@@ -2,7 +2,7 @@ from flask import Blueprint,Flask, render_template,request,redirect,url_for, ses
 from flask_login import login_user,logout_user, current_user
 from sqlalchemy import or_ ,update
 
-from Models.db import db
+from db import db
 from Models.admin import Admin
 from Models.user import User
 from Models.book import Book

@@ -1,7 +1,7 @@
 from flask import Blueprint,Flask,render_template,request,redirect,url_for, session,flash
 from sqlalchemy import or_ ,update
 
-from Models.db import db
+from db import db
 from Models.book import Book
 
 bookController = Blueprint('bookController',__name__)
