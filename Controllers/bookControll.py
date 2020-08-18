@@ -49,6 +49,3 @@ def book_search():
         return render_template("home.html",books=books)
         
     return redirect(url_for("routes.home"))
-
-
-

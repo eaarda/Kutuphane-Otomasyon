@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Resource,Api
 
 from db import db
-from Controllers.adminControll import adminController
+from Controllers.adminControll import adminController,AdminLogin, UserDelete,MemberSearch
 from Controllers.userControll import userController, UserRegister, NewUser, BookOperations,BookOperations2,BookOperations3
 from Controllers.bookControll import bookController
 from Routes.routes import routes
@@ -15,7 +15,7 @@ app.register_blueprint(adminController)
 app.register_blueprint(userController)
 app.register_blueprint(bookController)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Toshiba/Desktop/ktphne/data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/Toshiba/Desktop/library/data.db'
 app.config['SECRET_KEY'] = 'cokgizli'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 api = Api(app)
@@ -42,6 +42,10 @@ api.add_resource(UserRegister, '/logout')
 api.add_resource(BookOperations,'/borrow_book/<string:id>')
 api.add_resource(BookOperations2,'/delivery_book/<string:id>')
 api.add_resource(BookOperations3,'/postpone/<string:id>')
+api.add_resource(AdminLogin,'/adminlogin')
+api.add_resource(UserDelete,'/user_delete/<string:id>')
+api.add_resource(MemberSearch,'/member_search')
+
 
 
 if __name__ == "__main__":

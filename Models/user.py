@@ -18,7 +18,9 @@ class User(UserMixin,db.Model):
         self.password = password
 
 
-    @classmethod
+    def find_user(id):
+        return User.query.filter_by(id=id).first()
+
     def save(self):
         db.session.add(self)
         db.session.commit()
