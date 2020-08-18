@@ -16,3 +16,16 @@ class User(UserMixin,db.Model):
         self.username = username
         self.email = email
         self.password = password
+
+
+    @classmethod
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+
+    

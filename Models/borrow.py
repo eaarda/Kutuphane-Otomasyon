@@ -16,3 +16,12 @@ class Borrow(db.Model):
         self.book_id = book_id
         self.start_date = start_date
         self.end_date = end_date
+    
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

@@ -17,3 +17,21 @@ class Book(db.Model):
         self.type = type
         self.barcode = barcode
         self.status = status
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def update(self,id):
+        return db.session.query(Book).filter_by(id=id).update({"status":False})
+
+    def update2(self,id):
+        return db.session.query(Book).filter_by(id=id).update({"status":True})
+
+            
+

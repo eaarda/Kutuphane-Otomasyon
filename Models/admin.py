@@ -12,3 +12,5 @@ class Admin(UserMixin,db.Model):
     def __init__(self, admin, admin_pass):
         self.admin = admin
         self.admin_pass = admin_pass
+
+    

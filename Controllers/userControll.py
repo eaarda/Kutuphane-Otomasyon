@@ -1,4 +1,5 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
+from flask_restful import Resource,Api
 from flask_login import  UserMixin, login_user,logout_user, current_user
 from sqlalchemy import or_ ,update
 
@@ -12,74 +13,75 @@ from Models.borrow import Borrow
 
 userController = Blueprint('userController',__name__)
 
-@userController.route("/login", methods=['GET','POST'])
-def login():
-    email = request.form['email']
-    password = request.form['password']
-    wrong = User.query.filter_by(email=email,password=password).first()
-    if not email or not password:
-        flash("Geçersiz email veya şifre","login")
-    elif not wrong:
-        flash("Geçersiz email veya şifre","login")
-    else:
-        user = User.query.filter_by(email=email,password=password).first()
-        login_user(user)
-        return redirect('/home')
+class NewUser(Resource):
 
-    return render_template("index.html")
+    def post(self):
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        existing_user = User.query.filter_by(email=email).first()
+        
+        if not username or not email or not password :
+            flash("Tüm alanları doldurun!","signup")
+        elif existing_user:
+            flash("Geçersiz email adresi!","signup")
+        else:
+            user = User(username=username, email=email, password=password)
+            user.save()
+            login_user(user)
+            return redirect('/home')
+        return redirect('/')
 
-
-@userController.route("/signup" , methods=['POST'])
-def signup():
-    username = request.form['username']
-    email = request.form['email']
-    password = request.form['password']
-    existing_user = User.query.filter_by(email=email).first()
-    if not username or not email or not password :
-        flash("Tüm alanları doldurun!","signup")
-    elif existing_user:
-        flash("Geçersiz email adresi!","signup") 
-    else:
-        user = User(username=username, email=email, password=password)
-        db.session.add(user)
-        db.session.commit()
-        login_user(user)
-        return redirect('/home')
-
-    return render_template("index.html")
-
-
-@userController.route("/logout",methods=['GET'])
-def logout():
-    logout_user()
-    return redirect('/')
-
-@userController.route("/borrow_book/<string:id>")
-def borrow_book(id):
-    borrow = db.session.query(Book).filter_by(id=id).update({"status":False})
-    print(borrow)
-    newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
-    db.session.add(newBorrow)
-    db.session.commit()
-    print(newBorrow)
-
-    return redirect(url_for("routes.user_book"))
-
-@userController.route("/delivery_book/<string:id>",methods=['GET','DELETE'])
-def delivery_book(id):
-
-    d = db.session.query(Book).filter_by(id=id).update({"status":True})
-
-    delivery = Borrow.query.filter_by(book_id=id).first()
-    db.session.delete(delivery)
-    db.session.commit()
-    return redirect(url_for("routes.user_book"))
-
-@userController.route("/postpone/<string:id>")
-def postpone(id):
+class UserRegister(Resource):
     
-    p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
-    db.session.commit()
+    def post(self):
+        email = request.form['email']
+        password = request.form['password']
+        wrong = User.query.filter_by(email=email,password=password).first()
+        if not email or not password:
+            flash("Geçersiz email veya şifre","login")
+        elif not wrong:
+            flash("Geçersiz email veya şifre","login")
+        else:
+            user = User.query.filter_by(email=email,password=password).first()
+            login_user(user)
+            return redirect('/home')
 
-    return redirect(url_for("routes.user_book"))
+        return redirect('/')
+
+    def get(self):
+        logout_user()
+        print("cikiss")
+        return redirect('/')
+
+class BookOperations(Resource):
+
+    def get(self,id):
+        b = Book.update(self,id)
+        newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
+        Borrow.save(newBorrow)
+        return redirect(url_for("routes.user_book"))
+    
+class BookOperations2(Resource):
+
+    def get(self,id):
+        d = Book.update2(self,id)
+        delivery = Borrow.query.filter_by(book_id=id).first()
+        Borrow.delete(delivery)
+        return redirect (url_for("routes.user_book"))
+
+class BookOperations3(Resource):
+
+    def get(self,id):
+        p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
+        db.session.commit()
+        print("tarih değişti")
+        return redirect(url_for("routes.user_book"))
+
+
+
+
+
+
+
 

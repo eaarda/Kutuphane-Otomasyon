@@ -1,66 +1,87 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
-from flask_login import login_user,logout_user, current_user
+from flask_restful import Resource,Api
+from flask_login import  UserMixin, login_user,logout_user, current_user
 from sqlalchemy import or_ ,update
 
+from datetime import datetime  
+from datetime import timedelta  
+
 from db import db
-from Models.admin import Admin
 from Models.user import User
 from Models.book import Book
+from Models.borrow import Borrow
 
-adminController = Blueprint('adminController',__name__)
+userController = Blueprint('userController',__name__)
 
-@adminController.route("/adminlogin",methods=['GET','POST'])
-def adminlogin():
-    admin = request.form['admin']
-    admin_pass = request.form['admin_pass']
-    if not admin or not admin_pass:
-        print("eksik bilgi")
-    else:
-        admin = Admin.query.filter_by(admin=admin,admin_pass=admin_pass).first()
-        if admin:
-            print("giris yapildi")
-            return redirect('/admin')
+class NewUser(Resource):
+
+    def post(self):
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+        existing_user = User.query.filter_by(email=email).first()
+        
+        if not username or not email or not password :
+            flash("Tüm alanları doldurun!","signup")
+        elif existing_user:
+            flash("Geçersiz email adresi!","signup")
+        else:
+            user = User(username=username, email=email, password=password)
+            user.save()
+            login_user(user)
+            return redirect('/home')
+        return redirect('/')
+
+class UserRegister(Resource):
     
-    return render_template("/adminlogin.html")
+    def post(self):
+        email = request.form['email']
+        password = request.form['password']
+        wrong = User.query.filter_by(email=email,password=password).first()
+        if not email or not password:
+            flash("Geçersiz email veya şifre","login")
+        elif not wrong:
+            flash("Geçersiz email veya şifre","login")
+        else:
+            user = User.query.filter_by(email=email,password=password).first()
+            login_user(user)
+            return redirect('/home')
 
-@adminController.route("/logout",methods=['GET'])
-def logout():
-    logout_user()
-    return redirect('/')
+        return redirect('/')
+
+    def get(self):
+        logout_user()
+        print("cikiss")
+        return redirect('/')
+
+class BookOperations(Resource):
+
+    def get(self,id):
+        b = Book.update(self,id)
+        newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
+        Borrow.save(newBorrow)
+        return redirect(url_for("routes.user_book"))
+    
+class BookOperations2(Resource):
+
+    def get(self,id):
+        d = Book.update2(self,id)
+        delivery = Borrow.query.filter_by(book_id=id).first()
+        Borrow.delete(delivery)
+        return redirect (url_for("routes.user_book"))
+
+class BookOperations3(Resource):
+
+    def get(self,id):
+        p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
+        db.session.commit()
+        print("tarih değişti")
+        return redirect(url_for("routes.user_book"))
 
 
-@adminController.route("/user_delete/<string:id>",methods=['GET','DELETE'])
-def user_delete(id):
-    user = User.query.filter_by(id=id).first()
-    db.session.delete(user)
-    db.session.commit()
-    print("Kullanici silindi")
-    return redirect(url_for("routes.admin_users"))
 
-@adminController.route("/member_search",methods=['POST'])
-def member_search():
-    member_search = request.form.get('member_search')
-    search = "%{}%".format(member_search)
 
-    if member_search:
-        members = db.session.query(User).filter(User.username.like(search)).all()
-        print(members)
-        if not members:
-            flash("Kayıt bulunamadı")
-        return render_template("admin_users.html",members=members)
-        
-    return redirect(url_for("routes.admin_users"))
 
-@adminController.route("/admin_book_search",methods=['POST'])
-def admin_book_search():
-    book_search = request.form.get('admin_book_search')
-    search = "%{}%".format(book_search)
 
-    if book_search:
-        results = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
-        print(results)
-        if not results:
-            flash("Kayıt bulunamadı")
-        return render_template("admin.html",results = results)
-        
-    return redirect(url_for("routes.admin"))
+
+
