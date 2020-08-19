@@ -57,13 +57,20 @@ class AdminBookSearch(Resource):
     def post(self):
         book_search = request.form.get('admin_book_search')
         search = "%{}%".format(book_search)
-
+        results = []
         if book_search:
-            results = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
-            print(results)
-            if not results:
+            books = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
+            print(books)
+            if not books:
                 flash("Kayıt bulunamadı")
-            return render_template("admin.html",results = results)
+            for book in books:
+                results.append({'title':book.title,
+                                'author':book.author,
+                                'type':book.type,
+                                'barcode':book.barcode,
+                                'status':book.status})
+                print(results)
+            return jsonify(results)
         
         return redirect(url_for("routes.admin"))
 
