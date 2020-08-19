@@ -38,8 +38,6 @@ def admin_book():
 @routes.route("/admin_users")
 def admin_users():
     users = User.query.all()
-    print("uyeleeer:")
-    print(users)
     return render_template("admin_users.html", users=users)
 
 @routes.route("/user_book")

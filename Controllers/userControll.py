@@ -78,10 +78,3 @@ class Postpone(Resource):
         print("tarih değişti")
         return redirect(url_for("routes.user_book"))
 
-
-
-
-
-
-
-

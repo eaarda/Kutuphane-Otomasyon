@@ -44,12 +44,12 @@ class MemberSearch(Resource):
             if not members:
                 flash("Kayıt bulunamadı")
             for member in members:
-                return jsonify({member.id:{
-                    'username': member.username,
-                    'email': member.email,
-                }})
+                results = [{'username':member.username,
+                            'email':member.email}]
+                print(results)
+            return jsonify(results)
             
-        
+            
         return redirect(url_for("routes.admin_users"))
 
 class AdminBookSearch(Resource):

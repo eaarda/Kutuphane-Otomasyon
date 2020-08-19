@@ -32,9 +32,6 @@ login_manager.init_app(app)
 def get(id):
     return User.query.get(id)
 
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
 
 api.add_resource(NewUser, '/signup', endpoint='user')
 api.add_resource(UserRegister, '/login',endpoint='user2')
