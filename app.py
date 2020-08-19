@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_login import LoginManager
 from flask_restful import Resource,Api
 
 from db import db
@@ -7,7 +8,6 @@ from Controllers.userControll import userController, UserRegister, NewUser, Borr
 from Controllers.bookControll import bookController,BookAdd,BookDelete,BookSearch
 from Routes.routes import routes
 from Models.user import User
-from flask_login import LoginManager, UserMixin, login_user,logout_user, current_user
 
 app = Flask(__name__)
 app.register_blueprint(routes)

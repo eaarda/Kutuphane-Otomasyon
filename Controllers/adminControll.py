@@ -37,15 +37,15 @@ class MemberSearch(Resource):
     def post(self):
         member_search = request.form['member_search']
         search = "%{}%".format(member_search)
-
+        results = []
         if member_search:
             members = db.session.query(User).filter(User.username.like(search)).all()
             print(members)
             if not members:
                 flash("Kayıt bulunamadı")
             for member in members:
-                results = [{'username':member.username,
-                            'email':member.email}]
+                results.append({'username':member.username,
+                            'email':member.email})
                 print(results)
             return jsonify(results)
             
