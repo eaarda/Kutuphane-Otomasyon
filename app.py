@@ -2,9 +2,9 @@ from flask import Flask
 from flask_restful import Resource,Api
 
 from db import db
-from Controllers.adminControll import adminController,AdminLogin, UserDelete,MemberSearch
-from Controllers.userControll import userController, UserRegister, NewUser, BookOperations,BookOperations2,BookOperations3
-from Controllers.bookControll import bookController
+from Controllers.adminControll import adminController,AdminLogin, UserDelete,MemberSearch,AdminBookSearch
+from Controllers.userControll import userController, UserRegister, NewUser, BorrowBook,DeliveryBook,Postpone
+from Controllers.bookControll import bookController,BookAdd,BookDelete,BookSearch
 from Routes.routes import routes
 from Models.user import User
 from flask_login import LoginManager, UserMixin, login_user,logout_user, current_user
@@ -39,12 +39,17 @@ def send_static(path):
 api.add_resource(NewUser, '/signup', endpoint='user')
 api.add_resource(UserRegister, '/login',endpoint='user2')
 api.add_resource(UserRegister, '/logout')
-api.add_resource(BookOperations,'/borrow_book/<string:id>')
-api.add_resource(BookOperations2,'/delivery_book/<string:id>')
-api.add_resource(BookOperations3,'/postpone/<string:id>')
+api.add_resource(BorrowBook,'/borrow_book/<string:id>')
+api.add_resource(DeliveryBook,'/delivery_book/<string:id>')
+api.add_resource(Postpone,'/postpone/<string:id>')
 api.add_resource(AdminLogin,'/adminlogin')
 api.add_resource(UserDelete,'/user_delete/<string:id>')
 api.add_resource(MemberSearch,'/member_search')
+api.add_resource(AdminBookSearch,'/admin_book_search')
+api.add_resource(BookAdd,'/book_add')
+api.add_resource(BookDelete,'/book_delete/<string:id>')
+api.add_resource(BookSearch,'/book_search')
+
 
 
 

@@ -9,7 +9,7 @@ from Models.book import Book
 from Models.type import Type
 from Models.borrow import Borrow
 
-from Controllers.bookControll import book_search
+from Controllers.bookControll import BookSearch
 
 routes = Blueprint('routes',__name__)
 

@@ -54,7 +54,7 @@ class UserRegister(Resource):
         print("cikiss")
         return redirect('/')
 
-class BookOperations(Resource):
+class BorrowBook(Resource):
 
     def get(self,id):
         b = Book.update(self,id)
@@ -62,7 +62,7 @@ class BookOperations(Resource):
         Borrow.save(newBorrow)
         return redirect(url_for("routes.user_book"))
     
-class BookOperations2(Resource):
+class DeliveryBook(Resource):
 
     def get(self,id):
         d = Book.update2(self,id)
@@ -70,7 +70,7 @@ class BookOperations2(Resource):
         Borrow.delete(delivery)
         return redirect (url_for("routes.user_book"))
 
-class BookOperations3(Resource):
+class Postpone(Resource):
 
     def get(self,id):
         p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})

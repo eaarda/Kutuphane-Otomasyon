@@ -10,20 +10,6 @@ from Models.book import Book
 
 adminController = Blueprint('adminController',__name__)
 
-@adminController.route("/admin_book_search",methods=['POST'])
-def admin_book_search():
-
-    book_search = request.form.get('admin_book_search')
-    search = "%{}%".format(book_search)
-
-    if book_search:
-        results = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
-        print(results)
-        if not results:
-            flash("Kayıt bulunamadı")
-        return render_template("admin.html",results = results)
-        
-    return redirect(url_for("routes.admin"))
 
 class AdminLogin(Resource):
     def post(self):
@@ -57,7 +43,6 @@ class MemberSearch(Resource):
             print(members)
             if not members:
                 flash("Kayıt bulunamadı")
-            
             for member in members:
                 return jsonify({member.id:{
                     'username': member.username,
@@ -66,3 +51,19 @@ class MemberSearch(Resource):
             
         
         return redirect(url_for("routes.admin_users"))
+
+class AdminBookSearch(Resource):
+
+    def post(self):
+        book_search = request.form.get('admin_book_search')
+        search = "%{}%".format(book_search)
+
+        if book_search:
+            results = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search),Book.barcode.like(search))).all()
+            print(results)
+            if not results:
+                flash("Kayıt bulunamadı")
+            return render_template("admin.html",results = results)
+        
+        return redirect(url_for("routes.admin"))
+

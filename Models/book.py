@@ -26,7 +26,13 @@ class Book(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
+          
+    def find_book(id):
+        return Book.query.filter_by(id=id).first()
 
+    def find_barcode(barcode):
+        return Book.query.filter_by(barcode=barcode).first()
+    
     def update(self,id):
         return db.session.query(Book).filter_by(id=id).update({"status":False})
 
