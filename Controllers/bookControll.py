@@ -35,15 +35,15 @@ class BookDelete(Resource):
         print("kitap silindi")
         return redirect(url_for("routes.admin"))
 
-class BookSearch(Resource):
-    def post(self):
-        book_search = request.form.get('book_search')
-        search = "%{}%".format(book_search)
-        if book_search:
-          books = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search))).all()
-          print(books)
-          if not books:
-              flash("Kayıt bulunamadı")
-          return render_template("home.html",books=books)
+# class BookSearch(Resource):
+#     def post(self):
+#         book_search = request.form.get('book_search')
+#         search = "%{}%".format(book_search)
+#         if book_search:
+#           books = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search))).all()
+#           print(books)
+#           if not books:
+#               flash("Kayıt bulunamadı")
+#           return render_template("home.html",books=books)
         
-        return redirect(url_for("routes.home"))
+#         return redirect(url_for("routes.home"))
