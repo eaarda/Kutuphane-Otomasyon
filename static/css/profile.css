@@ -93,3 +93,9 @@ input {
     padding: 2px;
     margin: 0;
 }
+
+.form-control {
+    border: none;
+    width: 300px;
+    display: initial
+}
