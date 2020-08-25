@@ -45,6 +45,7 @@ h1 {
     font-size: 2em;
     margin-top: 40px;
     margin-bottom: 35px;
+    margin-left: -50px;
 }
 
 h2 {
@@ -57,16 +58,16 @@ h2 {
 }
 
 p {
-    border-width: 1px;
+    border-width: 5px;
     border-style: solid;
-    border-image: linear-gradient(to right, #3fb6a8, rgba(#7ed386, 0.5)) 1 0%;
+    border-image: linear-gradient(to right, #3FB6A8, rgba(126, 211, 134, 0.5)) 1 0%;
     border-top: 0;
     width: 80%;
     font-size: 15px;
     padding: 7px 0;
     color: #070707;
     margin-bottom: 2rem;
-    margin-left: -60px;
+    margin-left: -100px;
 }
 
 span {

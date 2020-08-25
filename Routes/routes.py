@@ -46,10 +46,6 @@ def admin_users():
     users = User.query.all()
     return render_template("admin_users.html", users=users)
 
-@routes.route("/profile")
-def profile():
-    return render_template("profile.html")
-
 @routes.route("/user_book")
 def user_book():
 
@@ -90,7 +86,6 @@ def member_search():
 
     return redirect(url_for("routes.admin_users")) 
 
-
 @routes.route("/book_search",methods=['POST'])
 def book_search():
     book_search = request.form.get('book_search')
@@ -106,3 +101,8 @@ def book_search():
 
         
     return redirect(url_for("routes.home"))
+
+@routes.route("/profile")
+def profile():
+    user = db.session.query(User).filter(User.id == current_user.id).first()
+    return render_template("profile.html",user=user)

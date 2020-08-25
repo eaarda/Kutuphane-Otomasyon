@@ -104,6 +104,7 @@ li .logo {
     perspective: 190px;
     transform-style: preserve-3d;
     -webkit-backface-visibility: visible;
+    margin-left: 150px;
 }
 
 .logo .paper {
