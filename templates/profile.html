@@ -71,13 +71,15 @@
                         <p><input class="form-control" type="text" id="username" name="username" placeholder={{user.username}}><button class="btn">Güncelle</button></p>
                         {% with messages = get_flashed_messages(category_filter=["name"]) %} {% if messages %} {% for message in messages %}
                         <div class="alert-error">{{ message }}</div>
+                        {% endfor %} {% endif %} {% endwith %}{% with messages = get_flashed_messages(category_filter=["name2"]) %} {% if messages %} {% for message in messages %}
+                        <div class="alert-ok">{{ message }}</div>
                         {% endfor %} {% endif %} {% endwith %}
                     </form>
                     <h2>Email</h2>
                     <p>{{user.email}} </p>
                     <form action="/change_pass" method="POST">
                         <h2>Şifre </h2>
-                        <p><input class="form-control" type="text" id="password" autocomplete="password" name="password" placeholder=" •••••••"> <button class="btn">Değiştir</button></p>
+                        <p><input class="form-control" type="password" name="password" id="password" autocomplete="password" placeholder=" •••••••"> <button class="btn">Değiştir</button></p>
                         {% with messages = get_flashed_messages(category_filter=["pass"]) %} {% if messages %} {% for message in messages %}
                         <div class="alert-error">{{ message }}</div>
                         {% endfor %} {% endif %} {% endwith %} {% with messages = get_flashed_messages(category_filter=["pass2"]) %} {% if messages %} {% for message in messages %}

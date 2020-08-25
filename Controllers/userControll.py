@@ -84,9 +84,11 @@ class UpdateName(Resource):
         new = request.form.get('username')
         if not new:
             flash("Yeni bir kullanıcı adı girin","name")
+            
         else:
             x = db.session.query(User).filter_by(id = current_user.id).update({"username": new})
             db.session.commit()
+            flash("Kullanıcı adı değiştirildi","name2")
             print("kullanici adi degisti")
 
         return redirect('/profile')
