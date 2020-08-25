@@ -46,6 +46,10 @@ def admin_users():
     users = User.query.all()
     return render_template("admin_users.html", users=users)
 
+@routes.route("/profile")
+def profile():
+    return render_template("profile.html")
+
 @routes.route("/user_book")
 def user_book():
 
