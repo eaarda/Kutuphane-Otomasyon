@@ -91,3 +91,18 @@ class UpdateName(Resource):
 
         return redirect('/profile')
 
+class ChangePass(Resource):
+
+    def post(self):
+        new = request.form.get('password')
+        print(new)
+        if not new:
+            flash("Yeni bir şifre girin","pass")
+        else:
+            x = db.session.query(User).filter_by(id=current_user.id).update({"password": new})
+            db.session.commit()
+            print("sifre degistirildi")
+            flash("Şifre değiştirildi","pass2")
+
+        return redirect('/profile')
+
