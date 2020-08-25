@@ -78,3 +78,16 @@ class Postpone(Resource):
         print("tarih değişti")
         return redirect(url_for("routes.user_book"))
 
+class UpdateName(Resource):
+
+    def post(self):
+        new = request.form.get('username')
+        if not new:
+            flash("Yeni bir kullanıcı adı girin","name")
+        else:
+            x = db.session.query(User).filter_by(id = current_user.id).update({"username": new})
+            db.session.commit()
+            print("kullanici adi degisti")
+
+        return redirect('/profile')
+

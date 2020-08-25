@@ -66,8 +66,13 @@
             <div class="rightbox">
                 <div class="profile">
                     <h1>Kişisel Bilgilerim</h1>
-                    <h2>Kullanıcı Adı</h2>
-                    <p><input class="form-control" type="text" id="username" name="username" placeholder={{user.username}}><button class="btn">Güncelle</button></p>
+                    <form action="/update_name" onsubmit="return Validate()" method="POST">
+                        <h2>Kullanıcı Adı</h2>
+                        <p><input class="form-control" type="text" id="username" name="username" placeholder={{user.username}}><button class="btn">Güncelle</button></p>
+                        {% with messages = get_flashed_messages(category_filter=["name"]) %} {% if messages %} {% for message in messages %}
+                        <div class="alert-error">{{ message }}</div>
+                        {% endfor %} {% endif %} {% endwith %}
+                    </form>
                     <h2>Email</h2>
                     <p>{{user.email}} </p>
                     <h2>Şifre </h2>
@@ -81,6 +86,16 @@
 
 
 </body>
+
+<style>
+    .alert-error {
+        padding: 8px;
+        color: red;
+        position: absolute;
+        margin-left: 75px;
+        margin-top: -80px
+    }
+</style>
 
 
 </html>
