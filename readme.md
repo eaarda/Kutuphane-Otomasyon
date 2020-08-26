@@ -25,14 +25,19 @@ Python3, Python Flask, Sqlite3
 - [Install Python for Windows](https://docs.python.org/3/using/windows.html#installation-steps "Install Python for Windows")
 
 - Install Python Flask
+
 ` $ pip install Flask`
 
 - Install Sqlite3
 	1. First of all, you have to download sqlite3. If you want to download db browser for view the database, can download the second link.
+
 [Download sqlite3](https://www.sqlite.org/download.html "Download sqlite3")
+
 [Download db browser](https://sqlitebrowser.org/ "Download db browser")
+
 	2. Then, you have to create db file in the project file.
 	In the terminal,
+
 	`$ sqlite3 data.db`
 
 
