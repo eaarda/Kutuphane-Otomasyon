@@ -61,7 +61,6 @@ class BorrowBook(Resource):
         limit = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).count()
         print(limit)
         if limit > 4:
-            print("limit")
             flash("Daha fazla kitap alamazsınız")
             return redirect(url_for("routes.home"))
         else:
