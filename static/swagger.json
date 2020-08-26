@@ -8,5 +8,20 @@
             "name": "MIT",
             "url": "https://opensource.org/licenses/MIT"
         }
+    },
+
+    "components": {
+        "schemas": {
+            "admin": {
+                "properties": {
+                    "admin": {
+                        "type": "string"
+                    },
+                    "admin_pass": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
     }
 }

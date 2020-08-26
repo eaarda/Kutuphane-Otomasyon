@@ -57,7 +57,6 @@ def user_book():
         return cdate
     
     time = datetime.datetime.now()
-    print(time)
 
     return render_template("user_book.html",orders=orders,convertdate=convertdate,time=time)
 

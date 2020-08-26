@@ -22,6 +22,12 @@ app.config['SECRET_KEY'] = 'cokgizli'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 api = Api(app)
 
+
+@app.route('/static/<path:path>')
+def send_static(path):
+    return send_from_directory('static', path)
+    
+
 SWAGGER_URL = '/swagger'
 API_URL = '/static/swagger.json'
 SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
@@ -44,10 +50,7 @@ login_manager.init_app(app)
 def get(id):
     return User.query.get(id)
 
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
-    
+
 
 
 api.add_resource(NewUser, '/signup', endpoint='user')
