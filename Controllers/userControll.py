@@ -58,8 +58,16 @@ class BorrowBook(Resource):
 
     def get(self,id):
         b = Book.update(self,id)
-        newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
-        Borrow.save(newBorrow)
+        limit = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).count()
+        print(limit)
+        if limit > 4:
+            print("limit")
+            flash("Daha fazla kitap alamazsınız")
+            return redirect(url_for("routes.home"))
+        else:
+            db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id)
+            newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
+            Borrow.save(newBorrow)
         return redirect(url_for("routes.user_book"))
     
 class DeliveryBook(Resource):
