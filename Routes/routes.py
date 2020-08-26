@@ -55,8 +55,11 @@ def user_book():
     def convertdate(rdate):
         cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
         return cdate
+    
+    time = datetime.datetime.now()
+    print(time)
 
-    return render_template("user_book.html",orders=orders,convertdate=convertdate)
+    return render_template("user_book.html",orders=orders,convertdate=convertdate,time=time)
 
 @routes.route("/admin_book_search",methods=['POST'])
 def admin_book_search():

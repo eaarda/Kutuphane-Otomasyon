@@ -68,9 +68,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                   
                     {%for borrow,book in orders %}
-                    <tr>
+                    {% if borrow.end_date < time %}
+                    <tr class ="table-danger">
                         <td>{{book.title}}</td>
                         <td>{{book.author}}</td>
                         <td>{{convertdate(borrow.start_date)}}</td>
@@ -78,6 +78,16 @@
                         <td><a href="/postpone/{{borrow.id}}" class="btn btn-outline-info">Teslim Tarihi Güncelle</a></td>
                         <td><a href="/delivery_book/{{borrow.book_id}}" class="btn btn-outline-success">Teslim Et</a></td>
                     </tr>
+                    {%else%}
+                     <tr class ="table-success">
+                        <td>{{book.title}}</td>
+                        <td>{{book.author}}</td>
+                        <td>{{convertdate(borrow.start_date)}}</td>
+                        <td>{{convertdate(borrow.end_date)}}</td>
+                        <td><a href="/postpone/{{borrow.id}}" class="btn btn-outline-info">Teslim Tarihi Güncelle</a></td>
+                        <td><a href="/delivery_book/{{borrow.book_id}}" class="btn btn-outline-success">Teslim Et</a></td>
+                    </tr>
+                    {%endif%}
                     {% endfor %}
                     
                 </tbody>
