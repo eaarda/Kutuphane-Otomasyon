@@ -61,6 +61,15 @@ exit()
 ```
 
 
+------------
+
+#### Database Schema
+
+A database schema is the blueprints of your database, it represents the description of a database structure, data types, and the constraints on the database.  As you can see in this project, database has 5 tables.
+
+[![Database Schema](C:\Users\Toshiba\Desktop\library\ss "Database Schema")](https://github.com/eaarda/Library-Automation-System/blob/master/ss/dia.png "Database Schema")
+
+
 
 
 
