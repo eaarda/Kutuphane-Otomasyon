@@ -6,7 +6,7 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from db import db
 from Controllers.adminControll import adminController,AdminLogin, UserDelete
 from Controllers.userControll import userController, UserRegister, NewUser, BorrowBook,DeliveryBook,Postpone,UpdateName,ChangePass
-from Controllers.bookControll import bookController,BookAdd,BookDelete
+from Controllers.bookControll import bookController,BookAdd,BookDelete, getInfo
 from Routes.routes import routes
 from Models.user import User
 
@@ -68,6 +68,7 @@ api.add_resource(BookDelete,'/book_delete/<string:id>')
 # api.add_resource(BookSearch,'/book_search')
 api.add_resource(UpdateName,'/update_name')
 api.add_resource(ChangePass,'/change_pass')
+api.add_resource(getInfo,'/getInfo/<string:id>')
 
 
 

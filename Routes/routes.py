@@ -110,12 +110,13 @@ def profile():
     user = db.session.query(User).filter(User.id == current_user.id).first()
     return render_template("profile.html",user=user)
 
-@routes.route("/getInfo/<string:id>")
-def getInfo(id):
+# @routes.route("/getInfo/<string:id>",methods=["POST"])
+# def getInfo(id):
     
-    i = db.session.query(Book).filter(id== Book.id)
-    print("***********************")
-    print(i)
+#     info = db.session.query(Book,Borrow).filter(id == Book.id).filter(Book.id==Borrow.book_id).first()
+#     print("********info*************")
+#     print(info)
 
-    return render_template("admin.html")
+#     return render_template("admin.html",info=info)
+
 

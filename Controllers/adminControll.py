@@ -31,6 +31,7 @@ class UserDelete(Resource):
         print("Kullanici silindi")
         return redirect(url_for("routes.admin_users"))
 
+
 # class MemberSearch(Resource):
 
 #     def post(self):
