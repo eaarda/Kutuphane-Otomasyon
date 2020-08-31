@@ -9,15 +9,49 @@
             "url": "https://opensource.org/licenses/MIT"
         }
     },
+    "paths": {
+        "/login": {
+            "parameters": [{
+                "email": "email",
+                "name": "email",
+                "required": true,
+                "description": "email",
+                "type": "string"
+            }],
+            "post": {
+                "summary": "Login for users",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/components/schemas/User"
+                        }
+
+                    },
+                    "400": {
+                        "description": "Failed"
+                    }
+                }
+            }
+        }
+
+    },
 
     "components": {
         "schemas": {
-            "admin": {
+            "User": {
+                "type": "object",
                 "properties": {
-                    "admin": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "username": {
                         "type": "string"
                     },
-                    "admin_pass": {
+                    "email": {
+                        "type": "string"
+                    },
+                    "password": {
                         "type": "string"
                     }
                 }

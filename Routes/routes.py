@@ -30,6 +30,7 @@ def admin():
     #     return render_template('admin.html', results=results)
     # else:
         books = Book.query.all()
+
         return render_template("admin.html",books=books) 
 
 @routes.route("/panel")
@@ -108,3 +109,13 @@ def book_search():
 def profile():
     user = db.session.query(User).filter(User.id == current_user.id).first()
     return render_template("profile.html",user=user)
+
+@routes.route("/getInfo/<string:id>")
+def getInfo(id):
+    
+    i = db.session.query(Book).filter(id== Book.id)
+    print("***********************")
+    print(i)
+
+    return render_template("admin.html")
+

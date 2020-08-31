@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, inital-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
-    <link rel="stylesheet" type="text/css" href="../static/css/search.css" />
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
+    <link rel="stylesheet" type="text/css" href="../static/css/search.css" />
 </head>
 
 
@@ -52,11 +57,11 @@
 
         <div style="margin-top: 200px;" class="container">
 
-             <form action="/admin_book_search" method="POST" id="searchform">
+            <form action="/admin_book_search" method="POST" id="searchform">
                 <input type="text" name="admin_book_search" id="search-bar" placeholder="Kitap,Yazar Adı ya da Barkod Girin" />
                 <ul class="output" style="display:none;"></ul>
                 <button type="submit" name="admin_book_search" id="submit">Bul</button>
-            </form> 
+            </form>
 
             <div id="result"></div>
 
@@ -73,8 +78,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                {% if results: %}
-                    {%for result in results %}
+                    {% if results: %} {%for result in results %}
                     <tr>
                         <th scope="row">{{result.barcode}}</th>
                         <td>{{result.title}}</td>
@@ -84,11 +88,10 @@
                         <td>available</td>
                         <td><a href="/book_delete/{{result.id}}" class="btn btn-danger">Sil</a> {% else %}
                             <td>unavailable</td>
-                        {% endif %}
+                            <td><a href="/getInfo/{{result.id}}" button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Demo</a></td>
+                            {% endif %}
                     </tr>
-                    {% endfor %}
-                    {% else %}
-                    {%for book in books %}
+                    {% endfor %} {% else %} {%for book in books %}
                     <tr>
                         <th scope="row">{{book.barcode}}</th>
                         <td>{{book.title}}</td>
@@ -98,19 +101,45 @@
                         <td>available</td>
                         <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a> {% else %}
                             <td>unavailable</td>
+                            <td><a href="/getInfo/{{book.id}}" button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Bilgi</a></td>
                             {% endif %}
                     </tr>
-                    {% endfor %}
-                {% endif %}
+                    {% endfor %} {% endif %}
                 </tbody>
-            </table> 
+            </table>
+
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Detaylı Bilgi</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <p>Kitap: </p>
+                            <p>Kullanıcı: </p>
+                            <p>Alınma Tarihi: </p>
+                            <p>Teslim Tarihi:</p>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-<script>
-
-
-</script>
+    <script>
+    </script>
 
 </body>
 
