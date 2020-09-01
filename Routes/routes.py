@@ -51,6 +51,7 @@ def admin_users():
 def user_book():
 
     orders = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).all()
+    print("***********orders********")
     print(orders)
 
     def convertdate(rdate):
@@ -110,10 +111,15 @@ def profile():
     user = db.session.query(User).filter(User.id == current_user.id).first()
     return render_template("profile.html",user=user)
 
-# @routes.route("/getInfo/<string:id>",methods=["GET"])
-# def getInfo(id):
+@routes.route("/getInfo/<string:id>",methods=["GET"])
+def getInfo(id):
     
-#     info = db.session.query(Book,Borrow,User).filter(id == Book.id).filter(Book.id==Borrow.book_id).filter(Borrow.user_id==User.id).first()
-#     print("********info*************")
-#     print(info)
-#     return render_template("admin.html",info=info)
+    info = db.session.query(Book,Borrow,User).filter(id == Book.id).filter(Book.id==Borrow.book_id).filter(Borrow.user_id==User.id).all()
+    print("********info*************")
+    print(info)
+    def convertdate(rdate):
+        cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
+        return cdate
+
+    return render_template("info.html",info=info,convertdate=convertdate)
+

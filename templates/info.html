@@ -1,0 +1,140 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, inital-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/css/home.css" />
+</head>
+
+
+<body>
+
+    <div>
+        <section class='header'>
+            <header>
+                <ul class='menu'>
+                    <li>
+                        <div class="logo">
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                            <div class="paper"></div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href='/admin'>Ana Sayfa</a>
+                    </li>
+                    <li>
+                        <a href='/admin_book'>Yeni Kitap</a>
+                    </li>
+                    <li>
+                        <a href='/admin_users'>Üyeler</a>
+                    </li>
+                    <li class="logout">
+                        <a href='/logout'>Çıkış Yap</a>
+                    </li>
+                </ul>
+            </header>
+        </section>
+
+        <div>
+            <div class="wrapper">
+                <div class="product-img">
+                    <img src="#" height="420" width="327">
+                </div>
+                <div class="product-info">
+                    <div class="product-text">
+                        {% for book,borrow,user in info %}
+                        <h1>{{book.title}}</h1><br>
+                        <h2> {{book.author}}</h2>
+                        <h2>Barcode:{{book.barcode}}</h2>
+                        <p>Kullanıcı:{{user.username}}<br><br>Alınma Tarihi:{{convertdate(borrow.start_date)}}<br><br>Teslim Tarihi:{{convertdate(borrow.end_date)}}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>
+
+<style>
+    .wrapper {
+        height: 420px;
+        width: 654px;
+        margin: 89px auto;
+        border-radius: 7px 7px 7px 7px;
+        -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+        box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+    }
+    
+    .product-img {
+        float: left;
+        height: 420px;
+        width: 327px;
+    }
+    
+    .product-img img {
+        border-radius: 7px 0 0 7px;
+    }
+    
+    .product-info {
+        float: left;
+        height: 420px;
+        width: 327px;
+        border-radius: 0 7px 10px 7px;
+        background-color: #ffffff;
+    }
+    
+    .product-text {
+        height: 300px;
+        width: 327px;
+    }
+    
+    .product-text h1 {
+        margin: 0 0 0 38px;
+        padding-top: 52px;
+        font-size: 34px;
+        color: #474747;
+    }
+    
+    .product-text h2 {
+        margin: 0 0 47px 38px;
+        font-size: 13px;
+        font-weight: 400;
+        text-transform: uppercase;
+        color: #d2d2d2;
+        letter-spacing: 0.2em;
+    }
+    
+    .product-text p {
+        height: 125px;
+        margin: 0 0 0 38px;
+        color: #8d8d8d;
+        line-height: 1.7em;
+        font-size: 15px;
+        font-weight: lighter;
+        overflow: hidden;
+    }
+    
+    span {
+        display: inline-block;
+        height: 50px;
+        font-size: 34px;
+    }
+</style>

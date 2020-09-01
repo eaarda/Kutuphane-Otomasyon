@@ -49,13 +49,3 @@ class BookDelete(Resource):
 #           return render_template("home.html",books=books)
         
 #         return redirect(url_for("routes.home"))
-
-
-
-# class getInfo(Resource):
-#     def get(self,id):
-#         info = db.session.query(Book,Borrow).filter(id == Book.id).filter(Book.id==Borrow.book_id).first()
-#         print("********info*************")
-#         print(info) 
-       
-#         return (info)
