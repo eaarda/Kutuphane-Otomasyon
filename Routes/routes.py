@@ -1,4 +1,4 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash,jsonify
 from flask_login import current_user
 import flask
 import datetime
@@ -110,13 +110,10 @@ def profile():
     user = db.session.query(User).filter(User.id == current_user.id).first()
     return render_template("profile.html",user=user)
 
-# @routes.route("/getInfo/<string:id>",methods=["POST"])
+# @routes.route("/getInfo/<string:id>",methods=["GET"])
 # def getInfo(id):
     
-#     info = db.session.query(Book,Borrow).filter(id == Book.id).filter(Book.id==Borrow.book_id).first()
+#     info = db.session.query(Book,Borrow,User).filter(id == Book.id).filter(Book.id==Borrow.book_id).filter(Borrow.user_id==User.id).first()
 #     print("********info*************")
 #     print(info)
-
 #     return render_template("admin.html",info=info)
-
-

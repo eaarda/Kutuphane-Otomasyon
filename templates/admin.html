@@ -88,7 +88,7 @@
                         <td>available</td>
                         <td><a href="/book_delete/{{result.id}}" class="btn btn-danger">Sil</a> {% else %}
                             <td>unavailable</td>
-                            <td><a href="/getInfo/{{result.id}}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Demo</button></a>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Demo</button></a>
                             </td>
                             {% endif %}
                     </tr>
@@ -102,8 +102,9 @@
                         <td>available</td>
                         <td><a href="/book_delete/{{book.id}}" class="btn btn-danger">Sil</a> {% else %}
                             <td>unavailable</td>
-                            <td><a href="/getInfo/{{book.id}}"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Bilgi</button>
-                            </a></td>
+                            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Bilgi</button>
+                                </a>
+                            </td>
                             {% endif %}
                     </tr>
                     {% endfor %} {% endif %}
@@ -123,12 +124,10 @@
 
                         <!-- Modal body -->
                         <div class="modal-body">
-                            {%for i in info %}
-                            <p>Kitap: {{i.title}}</p>
+                            <p>Kitap: </p>
                             <p>Kullanıcı: </p>
                             <p>Alınma Tarihi: </p>
                             <p>Teslim Tarihi:</p>
-                            {%endfor%}
                         </div>
 
                         <!-- Modal footer -->

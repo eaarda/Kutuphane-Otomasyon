@@ -1,6 +1,7 @@
 from flask import Blueprint,Flask,render_template,request,redirect,url_for, session,flash
 from flask_restful import Resource,Api
 from sqlalchemy import or_ ,update
+from flask import jsonify,json
 
 from db import db
 from Models.book import Book
@@ -49,10 +50,12 @@ class BookDelete(Resource):
         
 #         return redirect(url_for("routes.home"))
 
-class getInfo(Resource):
-    def get(self,id):
-        info = db.session.query(Book,Borrow).filter(id == Book.id).filter(Book.id==Borrow.book_id).first()
-        print("********info*************")
-        print(info)
-        
-        return info
+
+
+# class getInfo(Resource):
+#     def get(self,id):
+#         info = db.session.query(Book,Borrow).filter(id == Book.id).filter(Book.id==Borrow.book_id).first()
+#         print("********info*************")
+#         print(info) 
+       
+#         return (info)
