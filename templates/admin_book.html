@@ -60,7 +60,7 @@
         <div style="margin-top: 120px;" class="container">
             <h3>Kitap Kayıt</h3>
             <hr>
-            <form action="/book_add" method="POST">
+            <form action="/book_add" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="formGroupExampleInput">Kitap Adı</label>
                     <input type="text" name="title" class="form-control" id="formGroupExampleInput" placeholder="Kitap Adı Bilgisi">
@@ -82,6 +82,9 @@
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Barkod</label>
                     <input type="text" name="barcode" class="form-control" id="formGroupExampleInput4" placeholder="Barkod Bilgisi">
+                </div>
+                <div>
+                <input type = "file" name="pic"/>
                 </div>
                 <button type="submit" class="btn btn-primary">Ekle</button>
 
