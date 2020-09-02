@@ -3,6 +3,7 @@ from flask_login import current_user
 import flask
 import datetime
 from sqlalchemy import or_ ,update
+import base64
 
 from db import db
 from Models.admin import Admin
@@ -120,6 +121,10 @@ def getInfo(id):
     def convertdate(rdate):
         cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
         return cdate
+    def convertimg(rimg):
+        cimg = base64.b64encode(rimg).decode('ascii')
+        return cimg
+        
 
-    return render_template("info.html",info=info,convertdate=convertdate)
+    return render_template("info.html",info=info,convertdate=convertdate,convertimg=convertimg)
 
