@@ -50,7 +50,8 @@
         <div>
             <div class="wrapper">
                 <div class="product-img">
-                    <img src="#" height="420" width="327">
+                    {% for book,borrow,user in info %}
+                    <img src="data:;base64,{{ convertimg(book.img) }}" height="420" width="327"> {% endfor %}
                 </div>
                 <div class="product-info">
                     <div class="product-text">

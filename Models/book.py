@@ -10,13 +10,19 @@ class Book(db.Model):
     type = db.Column(db.String(200),db.ForeignKey('type.id'))
     barcode = db.Column(db.Integer)
     status = db.Column(db.Boolean, default=True)
+    img = db.Column(db.Text, unique=True, nullable=False)
+    imgname = db.Column(db.Text, nullable=False)
+    mimetype = db.Column(db.Text, nullable=False)
 
-    def __init__(self, title, author, type, barcode, status):
+    def __init__(self, title, author, type, barcode, status, img, imgname, mimetype):
         self.title = title
         self.author = author
         self.type = type
         self.barcode = barcode
         self.status = status
+        self.img = img
+        self.imgname = imgname
+        self.mimetype = mimetype
 
 
     def save(self):
