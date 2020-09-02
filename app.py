@@ -51,7 +51,6 @@ def get(id):
     return User.query.get(id)
 
 
-
 api.add_resource(NewUser, '/signup', endpoint='user')
 api.add_resource(UserRegister, '/login',endpoint='user2')
 api.add_resource(UserRegister, '/logout')
@@ -68,8 +67,6 @@ api.add_resource(BookDelete,'/book_delete/<string:id>')
 api.add_resource(UpdateName,'/update_name')
 api.add_resource(ChangePass,'/change_pass')
 # api.add_resource(getInfo,'/getInfo/<string:id>')
-
-
 
 
 if __name__ == "__main__":
