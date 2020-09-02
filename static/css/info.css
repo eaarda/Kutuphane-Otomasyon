@@ -1,0 +1,70 @@
+ /* @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
+    body {
+        background: linear-gradient(to right, #3fb6a8, #7ed386);
+    }
+     */
+ 
+ .wrapper {
+     height: 420px;
+     width: 654px;
+     margin: 89px auto;
+     border-radius: 7px 7px 7px 7px;
+     -webkit-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+     -moz-box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+     box-shadow: 0px 14px 32px 0px rgba(0, 0, 0, 0.15);
+ }
+ 
+ .product-img {
+     float: left;
+     height: 420px;
+     width: 327px;
+ }
+ 
+ .product-img img {
+     border-radius: 7px 0 0 7px;
+ }
+ 
+ .product-info {
+     float: left;
+     height: 420px;
+     width: 327px;
+     border-radius: 0 7px 10px 7px;
+     background-color: #ffffff;
+ }
+ 
+ .product-text {
+     height: 300px;
+     width: 327px;
+ }
+ 
+ .product-text h1 {
+     margin: 0 0 0 38px;
+     padding-top: 52px;
+     font-size: 35px;
+     color: #003b6e
+ }
+ 
+ .product-text h2 {
+     margin: 0 0 47px 38px;
+     font-size: 20px;
+     font-weight: 400;
+     text-transform: uppercase;
+     color: #007BFF;
+     letter-spacing: 0.2em;
+ }
+ 
+ .product-text p {
+     height: 125px;
+     margin: 0 0 0 38px;
+     color: black;
+     line-height: 1.7em;
+     font-size: 15px;
+     font-weight: lighter;
+     overflow: hidden;
+ }
+ 
+ span {
+     display: inline-block;
+     height: 50px;
+     font-size: 34px;
+ }
