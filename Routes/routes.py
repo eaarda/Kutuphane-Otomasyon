@@ -1,6 +1,5 @@
 from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash,jsonify
 from flask_login import current_user
-import flask
 import datetime
 from sqlalchemy import or_ ,update
 import base64
@@ -24,15 +23,8 @@ def home():
 
 @routes.route("/admin",methods=['POST','GET'])
 def admin():
-    # if flask.request.method=='POST':
-    #     results = AdminBookSearch.post(request)
-    #     print("++++++++++++++++++++++++++++++++++++++++++++")
-    #     print(results)
-    #     return render_template('admin.html', results=results)
-    # else:
         books = Book.query.all()
-
-        return render_template("admin.html",books=books) 
+        return render_template("admin.html",books=books)
 
 @routes.route("/panel")
 def panel():
@@ -48,20 +40,18 @@ def admin_users():
     users = User.query.all()
     return render_template("admin_users.html", users=users)
 
+
 @routes.route("/user_book")
 def user_book():
-
     orders = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).all()
     print("***********orders********")
     print(orders)
-
     def convertdate(rdate):
         cdate=datetime.datetime.strptime(str(rdate).split(" ")[0], "%Y-%m-%d").date()
         return cdate
-    
     time = datetime.datetime.now()
-
     return render_template("user_book.html",orders=orders,convertdate=convertdate,time=time)
+
 
 @routes.route("/admin_book_search",methods=['POST'])
 def admin_book_search():
@@ -104,7 +94,6 @@ def book_search():
             print("kayıt yok")
         return render_template("home.html",books=books)
 
-        
     return redirect(url_for("routes.home"))
 
 @routes.route("/profile")
@@ -114,7 +103,6 @@ def profile():
 
 @routes.route("/getInfo/<string:id>",methods=["GET"])
 def getInfo(id):
-    
     info = db.session.query(Book,Borrow,User).filter(id == Book.id).filter(Book.id==Borrow.book_id).filter(Borrow.user_id==User.id).all()
     print("********info*************")
     print(info)
@@ -124,7 +112,8 @@ def getInfo(id):
     def convertimg(rimg):
         cimg = base64.b64encode(rimg).decode('ascii')
         return cimg
-        
-
     return render_template("info.html",info=info,convertdate=convertdate,convertimg=convertimg)
+
+
+
 

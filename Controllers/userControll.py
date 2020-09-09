@@ -13,49 +13,7 @@ from Models.borrow import Borrow
 
 userController = Blueprint('userController',__name__)
 
-class NewUser(Resource):
-
-    def post(self):
-        username = request.form.get('username')
-        email = request.form.get('email')
-        password = request.form.get('password')
-        existing_user = User.query.filter_by(email=email).first()
-        
-        if not username or not email or not password :
-            flash("Tüm alanları doldurun!","signup")
-        elif existing_user:
-            flash("Geçersiz email adresi!","signup")
-        else:
-            user = User(username=username, email=email, password=password)
-            user.save()
-            login_user(user)
-            return redirect('/home')
-        return redirect('/')
-
-class UserRegister(Resource):
-    
-    def post(self):
-        email = request.form['email']
-        password = request.form['password']
-        wrong = User.query.filter_by(email=email,password=password).first()
-        if not email or not password:
-            flash("Geçersiz email veya şifre","login")
-        elif not wrong:
-            flash("Geçersiz email veya şifre","login")
-        else:
-            user = User.query.filter_by(email=email,password=password).first()
-            login_user(user)
-            return redirect('/home')
-
-        return redirect('/')
-
-    def get(self):
-        logout_user()
-        print("cikiss")
-        return redirect('/')
-
-class BorrowBook(Resource):
-
+class BorrowBook(Resource): #post
     def get(self,id):
         b = Book.update(self,id)
         limit = db.session.query(Borrow,Book).filter(Borrow.user_id == current_user.id).filter(Borrow.book_id== Book.id).count()
@@ -68,30 +26,29 @@ class BorrowBook(Resource):
             newBorrow = Borrow(user_id = current_user.id, book_id = id, start_date = datetime.now(), end_date = datetime.now() + timedelta(days=5))
             Borrow.save(newBorrow)
         return redirect(url_for("routes.user_book"))
-    
-class DeliveryBook(Resource):
 
+
+class DeliveryBook(Resource): #delete
     def get(self,id):
         d = Book.update2(self,id)
         delivery = Borrow.query.filter_by(book_id=id).first()
         Borrow.delete(delivery)
         return redirect (url_for("routes.user_book"))
 
-class Postpone(Resource):
 
+class Postpone(Resource): #put
     def get(self,id):
         p = db.session.query(Borrow).filter_by(id=id).update({"end_date": datetime.now() + timedelta(days=5)})
         db.session.commit()
         print("tarih değişti")
         return redirect(url_for("routes.user_book"))
 
-class UpdateName(Resource):
 
+class UpdateName(Resource):  #put
     def post(self):
         new = request.form.get('username')
         if not new:
             flash("Yeni bir kullanıcı adı girin","name")
-            
         else:
             x = db.session.query(User).filter_by(id = current_user.id).update({"username": new})
             db.session.commit()
@@ -100,8 +57,7 @@ class UpdateName(Resource):
 
         return redirect('/profile')
 
-class ChangePass(Resource):
-
+class ChangePass(Resource):  #put
     def post(self):
         new = request.form.get('password')
         print(new)
@@ -112,6 +68,21 @@ class ChangePass(Resource):
             db.session.commit()
             print("sifre degistirildi")
             flash("Şifre değiştirildi","pass2")
-
         return redirect('/profile')
+
+
+class UserDelete(Resource):  #delete 
+    def get(self,id):
+        user = User.find_user(id)
+        User.delete(user)
+        print("Kullanici silindi")
+        return redirect(url_for("routes.admin_users"))
+
+
+class BookDelete(Resource):  #delete
+    def get(self,id):
+        book = Book.find_book(id)
+        Book.delete(book)
+        print("kitap silindi")
+        return redirect(url_for("routes.admin"))
 

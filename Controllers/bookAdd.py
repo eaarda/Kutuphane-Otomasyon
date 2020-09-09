@@ -1,15 +1,9 @@
-from flask import Blueprint,Flask,render_template,request,redirect,url_for, session,flash
+from flask import Flask,request,redirect,url_for,flash
 from flask_restful import Resource,Api
-from sqlalchemy import or_ ,update
-from flask import jsonify,json
 from werkzeug.utils import secure_filename
 
 from db import db
 from Models.book import Book
-from Models.borrow import Borrow
-
-bookController = Blueprint('bookController',__name__)
-
 
 class BookAdd(Resource):
     def post(self):
@@ -34,23 +28,3 @@ class BookAdd(Resource):
             return redirect(url_for("routes.admin_book"))
 
         return redirect(url_for("routes.admin_book"))
-
-class BookDelete(Resource):
-    def get(self,id):
-        book = Book.find_book(id)
-        Book.delete(book)
-        print("kitap silindi")
-        return redirect(url_for("routes.admin"))
-
-# class BookSearch(Resource):
-#     def post(self):
-#         book_search = request.form.get('book_search')
-#         search = "%{}%".format(book_search)
-#         if book_search:
-#           books = db.session.query(Book).filter(or_(Book.title.like(search),Book.author.like(search))).all()
-#           print(books)
-#           if not books:
-#               flash("Kayıt bulunamadı")
-#           return render_template("home.html",books=books)
-        
-#         return redirect(url_for("routes.home"))
