@@ -71,7 +71,7 @@ A database schema is the blueprints of your database, it represents the descript
 ------------
 ## API Documentation
 
-** 1.  POST -  /authentication**
+**1.  POST -  /authentication**
 
 It verifies the identity of the user.  It gives the user the authority to use the service.
 
