@@ -3,7 +3,7 @@
 A simple flask app for a library automation system. Two roles implemented in this app; user and admin.
 
 ------------
-
+[TOC]
 
 ### Features
 
@@ -19,7 +19,7 @@ A simple flask app for a library automation system. Two roles implemented in thi
 
 ------------
 
-#### Prerequisites
+## Prerequisites
 Python3, Python Flask, Sqlite3
 
 - [Install Python for Windows](https://docs.python.org/3/using/windows.html#installation-steps "Install Python for Windows")
@@ -41,14 +41,14 @@ Python3, Python Flask, Sqlite3
 ------------
 
 
-#### Running Server
+### Running Server
 
 `$ python app.py`
 
 
 ------------
 
-#### Note
+### Note
 You have to add a admin for the system.  For this in the terminal,
 ```shell
 python
@@ -63,11 +63,211 @@ exit()
 
 ------------
 
-#### Database Schema
+## Database Schema
 
 A database schema is the blueprints of your database, it represents the description of a database structure, data types, and the constraints on the database.  As you can see in this project, database has 5 tables.
 
-[![Database Schema](C:\Users\Toshiba\Desktop\library\ss\dia.png "Database Schema")](https://github.com/eaarda/Library-Automation-System/blob/master/ss/dia.png "Database Schema")
+![](https://github.com/eaarda/Library-Automation-System/blob/master/ss/dia.png)
+
+------------
+## API Documentation
+
+** 1.  POST -  /authentication**
+
+It verifies the identity of the user.  It gives the user the authority to use the service.
+
+**Request**
+
+| Params  | Value |
+| ------------ | ------------ |
+|  email  | string User.email  |
+| password  | string User.password   |
+
+
+**2. GET - /authentication**
+
+It terminates the user's authority to access the service.
+
+**3. POST -  /register**
+
+It registers a new user.
+
+**Request**
+
+| Params  | Value |
+| ------------ | ------------ |
+|  username | string User.username |
+|  email  | string User.email  |
+| password  | string User.password   |
+
+**4. POST - /admin_auth**
+
+It verifies the identity of the admin.  It gives the admin the authority to use the service.
+
+**Request**
+
+| Param  | Value  |
+| ------------ | ------------ |
+| admin  | string Admin.admin   |
+| admin_pass  | string Admin.admin_password   |
+
+
+**5.  GET -  /admin_auth**
+
+It terminates the admin's authority to access the service.
+
+**6. GET - /books**
+
+Gets all the books
+
+**Response**
+
+| Params |
+| ------------ |
+| title   |
+|  author |
+|  type |
+|  barcode |
+|  status |
+|  imgname |
+
+**7.  POST -  /book_add**
+
+Adds new books to database
+
+**Request**
+
+|  Params | Value  |
+| ------------ | ------------ |
+| title  | string Book.title   |
+| author   | string Book.author   |
+| type   | string Type.ID   |
+|  barcode | string Book.barcode   |
+| pic  | file  |
+
+
+**8. GET -  /borrow_book/{id}**
+
+Adds the relevant book to the borrowed table.
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int Book.ID  |
+
+**9. GET -  /postpone/{id}**
+
+It updates the delivery date of the relevant book.
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int Book.ID  |
+
+**10. GET -  /delivery_book/{id}**
+
+Deletes the relevant book from the borrowed table
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int Book.ID  |
+
+**11. GET -  /book_delete/{id}**
+
+Deletes the relevant book from the book table.
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int Book.ID  |
+
+**12. GET - /user_delete/{id}**
+
+Deletes the relevant user from the user table.
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int User.ID  |
+
+**13.  POST - /update_name**
+
+Updates the user's username
+
+**Request**
+
+|  Params |  Value |
+| ------------ | ------------ |
+|  username | string User.username  |
+
+
+**14. POST - /change_pass**
+
+Updates the user's password
+
+**Request**
+
+|  Params |  Value |
+| ------------ | ------------ |
+|  password | string User.password  |
+
+**15. POST - /admin_book_search**
+
+Searches by title, author or barcode from the book table according to request and returns matching data for admin.
+
+**16. POST - /member_search**
+
+Searches by username from the user's table according to request and returns matching data for admin.
+
+**17. POST - /book_search**
+
+Searches by title, author or barcode from the book table according to request and returns matching data for user.
+
+**18. GET -/getInfo/{id}**
+
+Matches the related book with the borrow table and the user table using ID.
+
+**Request**
+
+|  Params | Value   |
+| ------------ | ------------ |
+| {id}  | int Book.ID |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
