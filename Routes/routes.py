@@ -1,4 +1,4 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash,jsonify
+from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
 from flask_login import current_user
 import datetime
 from sqlalchemy import or_ ,update

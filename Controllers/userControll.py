@@ -1,6 +1,6 @@
-from flask import Blueprint,Flask, render_template,request,redirect,url_for, session,flash
+from flask import Flask,request,redirect,url_for,flash
 from flask_restful import Resource,Api
-from flask_login import  UserMixin, login_user,logout_user, current_user
+from flask_login import current_user
 from sqlalchemy import or_ ,update
 
 from datetime import datetime  
@@ -10,8 +10,6 @@ from db import db
 from Models.user import User
 from Models.book import Book
 from Models.borrow import Borrow
-
-userController = Blueprint('userController',__name__)
 
 class BorrowBook(Resource): #post
     def get(self,id):

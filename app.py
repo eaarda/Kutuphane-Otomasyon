@@ -6,13 +6,12 @@ from db import db
 from Models.user import User
 from Routes.routes import routes
 
-from Controllers import userControll #del
-
 from Controllers import userAuthentication
 from Controllers import adminAuthentication
 from Controllers import register
 from Controllers import bookAdd
 from Controllers import books
+from Controllers import userControll
 
 app = Flask(__name__)
 app.register_blueprint(routes)
@@ -44,7 +43,6 @@ api.add_resource(userControll.UserDelete,'/user_delete/<string:id>')
 api.add_resource(userControll.BookDelete,'/book_delete/<string:id>')
 api.add_resource(userControll.UpdateName,'/update_name')
 api.add_resource(userControll.ChangePass,'/change_pass')
-
 
 api.add_resource(userAuthentication.UserAuthentication, '/user_auth')
 api.add_resource(adminAuthentication.AdminAuthentication, '/admin_auth')
