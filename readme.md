@@ -3,7 +3,6 @@
 A simple flask app for a library automation system. Two roles implemented in this app; user and admin.
 
 ------------
-[TOC]
 
 ### Features
 
